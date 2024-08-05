@@ -11,11 +11,40 @@ export default function Layout() {
 
 	return (
 		<>
-			<nav>
-				<NavLink to="home">Home</NavLink>
-				<NavLink to="todos">Todos</NavLink>
-				<NavLink to="posts">Posts</NavLink>
-				<NavLink to="albums">Albums</NavLink>
+			<span className="layout">THIS PROJECT</span>
+			<nav className="main-nav">
+				<NavLink
+					to="home"
+					className={(isActive) =>
+						isActive ? "nav-link" : "nav-link active"
+					}
+				>
+					Home
+				</NavLink>
+				<NavLink
+					to="todos"
+					className={(isActive) =>
+						isActive ? "nav-link" : "nav-link active"
+					}
+				>
+					Todos
+				</NavLink>
+				<NavLink
+					to="posts"
+					className={(isActive) =>
+						isActive ? "nav-link" : "nav-link active"
+					}
+				>
+					Posts
+				</NavLink>
+				<NavLink
+					to="albums"
+					className={(isActive) =>
+						isActive ? "nav-link" : "nav-link active"
+					}
+				>
+					Albums
+				</NavLink>
 				<button onClick={signOut}>Sign out</button>
 			</nav>
 			<Outlet />
