@@ -1,20 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const MAIN_URL = 'https://localhost:3000/';
+const MAIN_URL = 'http://localhost:3000/';
 
-function useFetch(path, options = { method: 'GET', data: {} }) {
+function useFetch() {
+	const [path, setPath] = useState('users');
+	const [options, setOptions] = useState({ method: 'GET', data: {} });
+
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
 	const [failed, setFailed] = useState(false);
 
-	try {
+	const setRequest = (
+		newPath,
+		newOptions = { method: 'GET', body: undefined }
+	) => {
+		setPath(newPath);
+		setOptions(newOptions);
+	};
+
+	useEffect(() => {
 		setIsLoading(true);
 		setFailed(false);
-		fetch(`${MAIN_URL}/${path}`, {
-			method: options.method,
-			body: options.data,
-		})
+		fetch(`${MAIN_URL}${path}`, options)
 			.then((res) => {
+				console.log(res);
 				if (!res.ok) setFailed(true);
 				return res.json();
 			})
@@ -22,12 +31,13 @@ function useFetch(path, options = { method: 'GET', data: {} }) {
 				setData(data);
 				setIsLoading(false);
 			})
-			.catch((err) => (err ? setFailed(true) : false));
-	} catch (err) {
-		console.error(err);
-		setFailed(true);
-	}
-	return { isLoading, failed, data };
+			.catch((err) => {
+				console.log(err);
+				return err ? setFailed(true) : false;
+			});
+	}, [path, options]);
+
+	return { setRequest, isLoading, failed, data };
 }
 
 export { useFetch };
