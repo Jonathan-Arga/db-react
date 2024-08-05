@@ -1,3 +1,1 @@
-export default function Posts() {
-	return <h1>posts</h1>;
-}
+export default function Posts() {}

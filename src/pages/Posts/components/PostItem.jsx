@@ -1,3 +1,1 @@
-export default function PostItem() {
-	return <h2>post item</h2>;
-}
+export default function PostItem() {}
