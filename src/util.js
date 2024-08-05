@@ -1,9 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const MAIN_URL = 'http://localhost:3000/';
 
+export const useIsMount = () => {
+	const isMountRef = useRef(true);
+	useEffect(() => {
+		isMountRef.current = false;
+	}, []);
+	return isMountRef.current;
+};
+
 function useFetch() {
-	const [path, setPath] = useState('users');
+	const isMount = useIsMount();
+	const [path, setPath] = useState('');
 	const [options, setOptions] = useState({ method: 'GET', data: {} });
 
 	const [data, setData] = useState();
@@ -19,6 +28,7 @@ function useFetch() {
 	};
 
 	useEffect(() => {
+		if (isMount) return;
 		setIsLoading(true);
 		setFailed(false);
 		fetch(`${MAIN_URL}${path}`, options)
