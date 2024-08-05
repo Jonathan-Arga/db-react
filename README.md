@@ -1,4 +1,4 @@
 # Todo:
 
-Albums,Login,Home,MainLayout - jonathan
-Posts,SignUp,Todos - michael
+Albums, Login, Home, MainLayout - jonathan
+Posts, SignUp, Todos - michael
