@@ -2,19 +2,18 @@ import { useState } from 'react';
 
 const MAIN_URL = 'https://localhost:3000/';
 
-function useFetch(path, bodyData = undefined) {
+function useFetch(path, options = { method: 'GET', data: {} }) {
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
 	const [failed, setFailed] = useState(false);
 
-	let sendMethod = 'GET';
-
-	if (bodyData) sendMethod = 'POST';
-
 	try {
 		setIsLoading(true);
 		setFailed(false);
-		fetch(`${MAIN_URL}/${path}`, { method: sendMethod, body: bodyData })
+		fetch(`${MAIN_URL}/${path}`, {
+			method: options.method,
+			body: options.data,
+		})
 			.then((res) => {
 				if (!res.ok) setFailed(true);
 				return res.json();
