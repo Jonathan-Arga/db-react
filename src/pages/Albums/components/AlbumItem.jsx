@@ -1,1 +1,3 @@
-export default function AlbumItem() {}
+export default function AlbumItem() {
+	return <h2>Album Item</h2>;
+}
