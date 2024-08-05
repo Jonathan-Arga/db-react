@@ -24,7 +24,7 @@ export default function LoginForm() {
 			setPassword("");
 			return;
 		}
-		localStorage.setItem("current", username);
+		localStorage.setItem("current", myUser[0].id);
 		navigate("/home");
 	}
 
