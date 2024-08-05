@@ -50,4 +50,4 @@ function useFetch() {
 	return { setRequest, isLoading, failed, data };
 }
 
-export { useFetch };
+export { useFetch }; //
