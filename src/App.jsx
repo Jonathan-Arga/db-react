@@ -9,6 +9,10 @@ import PostItem from './pages/Posts/components/PostItem';
 import Albums from './pages/Albums/Albums';
 import AlbumItem from './pages/Albums/components/AlbumItem';
 
+import AlbumsLayout from './Layout/AlbumsLayout/AlbumsLayout';
+import PostsLayout from './Layout/PostsLayout/PostsLayout';
+import Layout from './Layout/MainLayout/Layout';
+
 import './App.css';
 
 function App() {
