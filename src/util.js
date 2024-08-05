@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-const MAIN_URL = 'https://localhost:3000/';
+const MAIN_URL = "https://localhost:3000/";
 
-function useFetch(path, options = { method: 'GET', data: {} }) {
+function useFetch(path, options = { method: "GET", data: {} }) {
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
 	const [failed, setFailed] = useState(false);
