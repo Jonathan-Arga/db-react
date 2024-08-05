@@ -1,0 +1,11 @@
+.signupForm {
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+	width: 25%;
+	background-color: rgb(29, 29, 29);
+	border-radius: 12px;
+}
+.signupForm input {
+	border: none;
+	border-radius: 6px;
+}
