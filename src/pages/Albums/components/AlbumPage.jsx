@@ -3,7 +3,7 @@ import { Link, useOutletContext, useParams } from "react-router-dom";
 import { checkLoggedIn, getData } from "../../../util";
 import AddPhoto from "./AddPhoto";
 import DeletePhoto from "./DeletePhoto";
-import styles from "../css/AlbumPage.module.css";
+import styles from "../css/Albums.module.css";
 const PHOTOS_PER_PAGE = 10;
 
 export default function AlbumPage() {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import { getData } from "../../util";
-import styles from "../../pages/Albums/css/AlbumPage.module.css";
+import styles from "../../pages/Albums/css/Albums.module.css";
 
 export default function AlbumPageLayout() {
 	const { albumid } = useParams();

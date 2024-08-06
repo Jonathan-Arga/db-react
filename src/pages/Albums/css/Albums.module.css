@@ -74,3 +74,47 @@
 .dialog input {
 	border-radius: 5px;
 }
+
+.blockInput {
+	display: block;
+	margin: 10px;
+}
+
+.layoutHeader {
+	text-align: left;
+	text-decoration: underline;
+}
+
+.albumImage {
+	border-radius: 10px;
+	margin: 2px;
+	width: 150px;
+	height: 150px;
+}
+
+.imageContainer {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	margin: 20px 0;
+}
+
+.buttonContainer {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.pageButton {
+	color: white;
+	border-radius: 8px;
+	border: 1px solid transparent;
+	padding: 0.6em 1.2em;
+	margin: 10px;
+	font-size: 1em;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: #1a1a1a;
+	cursor: pointer;
+	transition: all 0.25s;
+}
