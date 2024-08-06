@@ -1,29 +1,43 @@
 import { Outlet, redirect, useLocation } from 'react-router-dom';
+import { createContext, useRef, useState } from 'react';
 import { MAIN_URL } from '../../App';
-import { createContext, useState } from 'react';
+
+import styles from './PostsLayout.module.css';
 
 export const DeletingPostsContext = createContext(null);
 
 export default function PostsLayout() {
+	const deletionButtonRef = useRef();
+
 	const location = useLocation();
 	const [DeletingPostsContextState, SetDeletingPostsContextState] =
 		useState(false);
 	const currentPage = location.pathname.substring(
 		location.pathname.lastIndexOf('/') + 1
 	);
+
 	/**
 	 * @param {MouseEvent} e
 	 */
-	const HandleNewPostClick = () => {};
+	const HandleNewPostClick = () => {
+		if (currentPage != 'posts') redirect('/posts');
+	};
 	/**
 	 * @param {MouseEvent} e
 	 */
 	const HandleDeletePostClick = () => {
-		if (currentPage != 'posts')
+		if (currentPage != 'posts') {
+			let userid = location.pathname.substring(
+				location.pathname.lastIndexOf('/') + 1
+			);
+			userid = userid.substring(0, userid.indexOf('/'));
+			if (localStorage.getItem('current') !== userid)
+				return alert('You are not authorized to delete this post.');
 			// delete currentpage cause its a post
 			return fetch(MAIN_URL + `posts/${currentPage}`, {
 				method: 'DELETE',
 			}).then(() => redirect('/posts'));
+		}
 		SetDeletingPostsContextState(
 			(prevIsDeletingPosts) => !prevIsDeletingPosts
 		);
@@ -49,7 +63,12 @@ export default function PostsLayout() {
 						false
 					)}
 					<button
-						className="DeletePostButton"
+						className={
+							DeletingPostsContextState
+								? [styles.DeletePostButtonFocused]
+								: [styles.DeletePostButton]
+						}
+						ref={deletionButtonRef}
 						onClick={HandleDeletePostClick}
 					>
 						&#128465;
