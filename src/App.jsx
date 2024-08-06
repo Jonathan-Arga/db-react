@@ -34,22 +34,22 @@ function App() {
 			>
 				<Notifications />
 			</NotificationsListContext.Provider>
-		<BrowserRouter>
-			<Routes>
-				<Route path="/login" element={<Login />} />
-				<Route path="/register" element={<Register />} />
-				<Route path="/" element={<MainLayout />}>
-					<Route path="home" element={<Home />} />
-					<Route path="todos" element={<Todos />} />
+			<BrowserRouter>
+				<Routes>
+					<Route path="/login" element={<Login />} />
+					<Route path="/register" element={<Register />} />
+					<Route path="/" element={<MainLayout />}>
+						<Route path="home" element={<Home />} />
+						<Route path="todos" element={<Todos />} />
 
-					<Route path="posts" element={<PostsLayout />}>
-						<Route index element={<Posts />} />
-						<Route path=":postid" element={<PostItem />} />
-					</Route>
-					<Route path="albums" element={<AlbumsLayout />}>
-						<Route index element={<Albums />} />
-						<Route path=":photoid" element={<AlbumItem />} />
-
+						<Route path="posts" element={<PostsLayout />}>
+							<Route index element={<Posts />} />
+							<Route path=":postid" element={<PostItem />} />
+						</Route>
+						<Route path="albums" element={<AlbumsLayout />}>
+							<Route index element={<Albums />} />
+							<Route path=":photoid" element={<AlbumItem />} />
+						</Route>
 					</Route>
 				</Routes>
 			</BrowserRouter>
