@@ -1,20 +1,27 @@
 import { Outlet, redirect, useLocation } from 'react-router-dom';
+import { createContext, useRef, useState } from 'react';
 import { MAIN_URL } from '../../App';
-import { createContext, useState } from 'react';
+
+import styles from './PostsLayout.module.css';
 
 export const DeletingPostsContext = createContext(null);
 
 export default function PostsLayout() {
+	const deletionButtonRef = useRef();
+
 	const location = useLocation();
 	const [DeletingPostsContextState, SetDeletingPostsContextState] =
 		useState(false);
 	const currentPage = location.pathname.substring(
 		location.pathname.lastIndexOf('/') + 1
 	);
+
 	/**
 	 * @param {MouseEvent} e
 	 */
-	const HandleNewPostClick = () => {};
+	const HandleNewPostClick = () => {
+		if (currentPage != 'posts') redirect('/posts');
+	};
 	/**
 	 * @param {MouseEvent} e
 	 */
@@ -49,7 +56,8 @@ export default function PostsLayout() {
 						false
 					)}
 					<button
-						className="DeletePostButton"
+						className={styles.DeletePostButton}
+						ref={deletionButtonRef}
 						onClick={HandleDeletePostClick}
 					>
 						&#128465;
