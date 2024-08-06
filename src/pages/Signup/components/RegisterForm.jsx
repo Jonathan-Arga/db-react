@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import styles from './RegisterForm.module.css';
 import { Navigate } from 'react-router-dom';
 
@@ -10,8 +10,6 @@ export default function RegisterForm() {
 	const passwordRef = useRef();
 	const repeatPasswordRef = useRef();
 	const errorRef = useRef();
-
-	const [redirect, setRedirect] = useState();
 
 	/**
 	 * @param {React.FormEvent} e
@@ -30,16 +28,19 @@ export default function RegisterForm() {
 				)
 					return (errorRef.current.textContent =
 						'Username already exists!');
+				const myUser = {
+					id: data.length + 1,
+					name: nameRef.current.value,
+					username: usernameRef.current.value,
+					email: emailRef.current.value,
+					website: passwordRef.current.value,
+				};
 				fetch('http://localhost:3000/users', {
 					method: 'POST',
-					body: JSON.stringify({
-						id: data.length + 1,
-						name: nameRef.current.value,
-						username: usernameRef.current.value,
-						email: emailRef.current.value,
-						website: passwordRef.current.value,
-					}),
-				}).then((res) => (res.ok ? setRedirect(true) : false));
+					body: JSON.stringify(myUser),
+				}).then((res) => {
+					if (res.ok) localStorage.setItem('current', myUser.id);
+				});
 			});
 	};
 
@@ -84,7 +85,11 @@ export default function RegisterForm() {
 				<br />
 				<p className={styles.alone} ref={errorRef}></p>
 			</fieldset>
-			{redirect ? <Navigate to="/login"></Navigate> : <></>}
+			{localStorage.getItem('current') ? (
+				<Navigate to="/home"></Navigate>
+			) : (
+				false
+			)}
 		</form>
 	);
 }
