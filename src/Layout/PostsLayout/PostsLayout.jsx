@@ -1,11 +1,13 @@
 import { Outlet, redirect, useLocation } from 'react-router-dom';
-import { DeletingPostsContext, MAIN_URL } from '../../App';
-import { useContext } from 'react';
+import { MAIN_URL } from '../../App';
+import { createContext, useState } from 'react';
+
+export const DeletingPostsContext = createContext(null);
 
 export default function PostsLayout() {
 	const location = useLocation();
-	const [isDeletingPosts, setIsDeletingPosts] =
-		useContext(DeletingPostsContext);
+	const [DeletingPostsContextState, SetDeletingPostsContextState] =
+		useState(false);
 	const currentPage = location.pathname.substring(
 		location.pathname.lastIndexOf('/') + 1
 	);
@@ -22,30 +24,39 @@ export default function PostsLayout() {
 			return fetch(MAIN_URL + `posts/${currentPage}`, {
 				method: 'DELETE',
 			}).then(() => redirect('/posts'));
-		setIsDeletingPosts((prevIsDeletingPosts) => !prevIsDeletingPosts);
+		SetDeletingPostsContextState(
+			(prevIsDeletingPosts) => !prevIsDeletingPosts
+		);
 	};
 	return (
 		<>
-			<div className="postsLayoutHeader">
-				<div className="title">Posts</div>
-				{currentPage === 'posts' ? (
+			<DeletingPostsContext.Provider
+				value={[
+					DeletingPostsContextState,
+					SetDeletingPostsContextState,
+				]}
+			>
+				<div className="postsLayoutHeader">
+					<div className="title">Posts</div>
+					{currentPage === 'posts' ? (
+						<button
+							className="NewPostButton"
+							onClick={HandleNewPostClick}
+						>
+							&#x2B;
+						</button>
+					) : (
+						false
+					)}
 					<button
-						className="NewPostButton"
-						onClick={HandleNewPostClick}
+						className="DeletePostButton"
+						onClick={HandleDeletePostClick}
 					>
-						&#x2B;
+						&#128465;
 					</button>
-				) : (
-					false
-				)}
-				<button
-					className="DeletePostButton"
-					onClick={HandleDeletePostClick}
-				>
-					&#128465;
-				</button>
-			</div>
-			<Outlet />
+				</div>
+				<Outlet />
+			</DeletingPostsContext.Provider>
 		</>
 	);
 }

@@ -18,11 +18,7 @@ import { createContext, useState } from 'react';
 
 export const MAIN_URL = 'http://localhost:3000/';
 
-export const DeletingPostsContext = createContext(null);
-
 function App() {
-	const [DeletingPostsContextState, SetDeletingPostsContextState] =
-		useState(false);
 	return (
 		<BrowserRouter>
 			<Routes>
@@ -31,17 +27,11 @@ function App() {
 				<Route path="/" element={<MainLayout />}>
 					<Route path="home" element={<Home />} />
 					<Route path="todos" element={<Todos />} />
-					<DeletingPostsContext.Provider
-						value={[
-							DeletingPostsContextState,
-							SetDeletingPostsContextState,
-						]}
-					>
-						<Route path="posts" element={<PostsLayout />}>
-							<Route index element={<Posts />} />
-							<Route path=":postid" element={<PostItem />} />
-						</Route>
-					</DeletingPostsContext.Provider>
+
+					<Route path="posts" element={<PostsLayout />}>
+						<Route index element={<Posts />} />
+						<Route path=":postid" element={<PostItem />} />
+					</Route>
 					<Route path="albums" element={<AlbumsLayout />}>
 						<Route index element={<Albums />} />
 						<Route path=":photoid" element={<AlbumItem />} />
