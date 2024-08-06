@@ -1,13 +1,16 @@
 import { useEffect } from "react";
-import { useFetch } from "../../util";
+import { checkLoggedIn, useFetch } from "../../util";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
 	const dataObj = useFetch();
 	console.log(dataObj);
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		dataObj.setRequest(`users/${localStorage.getItem("current")}`);
-		console.log(dataObj);
+		const currentUser = checkLoggedIn();
+		if (!currentUser) return;
+		dataObj.setRequest(`users/${currentUser}`);
 	}, []);
 
 	return dataObj.isLoading ? (

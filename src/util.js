@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from "react";
 
-const MAIN_URL = 'http://localhost:3000/';
+const MAIN_URL = "http://localhost:3000/";
 
 export const useIsMount = () => {
 	const isMountRef = useRef(true);
@@ -12,8 +12,8 @@ export const useIsMount = () => {
 
 function useFetch() {
 	const isMount = useIsMount();
-	const [path, setPath] = useState('');
-	const [options, setOptions] = useState({ method: 'GET', data: {} });
+	const [path, setPath] = useState("");
+	const [options, setOptions] = useState({ method: "GET", data: {} });
 
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
@@ -21,7 +21,7 @@ function useFetch() {
 
 	const setRequest = (
 		newPath,
-		newOptions = { method: 'GET', body: undefined }
+		newOptions = { method: "GET", body: undefined }
 	) => {
 		setPath(newPath);
 		setOptions(newOptions);
@@ -50,4 +50,25 @@ function useFetch() {
 	return { setRequest, isLoading, failed, data };
 }
 
-export { useFetch }; //
+function checkLoggedIn() {
+	const currUserId = localStorage.getItem("current");
+	if (!currUserId) {
+		alert("You are not signed in");
+		navigate("/login");
+	}
+	return currUserId;
+}
+
+async function getData(path, setter, options = null) {
+	try {
+		const res = await fetch(`${MAIN_URL}${path}`, options);
+		if (res.status === 404) throw new Error("404: Not found");
+		if (!res.ok) throw new Error("Failed to fetch Data");
+		const data = await res.json();
+		setter(data);
+	} catch (err) {
+		console.error(err);
+	}
+}
+
+export { useFetch, checkLoggedIn, getData };
