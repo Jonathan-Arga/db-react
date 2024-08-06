@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 
 const MAIN_URL = 'http://localhost:3000/';
 
