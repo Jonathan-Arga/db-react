@@ -32,6 +32,10 @@ export default function AlbumPage() {
 				index < pageId * PHOTOS_PER_PAGE
 		);
 
+	const showNextPageButon =
+		pagePhotos &&
+		pagePhotos.length + (pageId - 1) * PHOTOS_PER_PAGE < albumPhotos.length;
+
 	return (
 		<>
 			<h2>Album: {album && album.title}</h2>
@@ -46,13 +50,11 @@ export default function AlbumPage() {
 					Last Page
 				</Link>
 			)}
-			{pagePhotos &&
-				pagePhotos.length + (pageId - 1) * PHOTOS_PER_PAGE <
-					albumPhotos.length && (
-					<Link to={`../${parseInt(pageId) + 1}`} relative="path">
-						Next Page
-					</Link>
-				)}
+			{showNextPageButon && (
+				<Link to={`../${parseInt(pageId) + 1}`} relative="path">
+					Next Page
+				</Link>
+			)}
 		</>
 	);
 }

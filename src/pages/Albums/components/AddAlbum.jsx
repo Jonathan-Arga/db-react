@@ -4,13 +4,20 @@ import { checkLoggedIn } from "../../../util";
 export default function AddAlbum() {
 	const [addingAlbum, setAddingAlbum] = useState(false);
 	const [newTitle, setNewTitle] = useState("");
+	const [failText, setFailText] = useState("");
 
 	async function addAlbum(e) {
 		e.preventDefault();
-		setAddingAlbum(false);
+		setFailText("");
 
 		const currUserId = checkLoggedIn();
 		if (!currUserId) return;
+		if (newTitle.trim() === "") {
+			setFailText("Empty Title");
+			return;
+		}
+
+		setAddingAlbum(false);
 
 		const res = await fetch("http://localhost:3000/albums");
 		const albums = await res.json();
@@ -47,7 +54,13 @@ export default function AddAlbum() {
 						Cancel
 					</button>
 				</form>
+				<p>{failText}</p>
 			</div>
 		);
-	return <button onClick={() => setAddingAlbum(true)}>Add Album</button>;
+
+	return (
+		<div>
+			<button onClick={() => setAddingAlbum(true)}>Add Album</button>
+		</div>
+	);
 }

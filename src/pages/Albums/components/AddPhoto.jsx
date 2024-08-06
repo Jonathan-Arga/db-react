@@ -6,6 +6,7 @@ export default function AddPhoto({ albumId }) {
 	const [newTitle, setNewTitle] = useState("");
 	const [newURL, setNewURL] = useState("");
 	const [newThumbnail, setNewThumbnail] = useState("");
+	const [failText, setFailText] = useState("");
 
 	async function addPhoto(e) {
 		e.preventDefault();
@@ -13,6 +14,10 @@ export default function AddPhoto({ albumId }) {
 
 		const currUserId = checkLoggedIn();
 		if (!currUserId) return;
+		if (newTitle.trim() === "") {
+			setFailText("Empty Title");
+			return;
+		}
 
 		const res = await fetch("http://localhost:3000/photos");
 		const photos = await res.json();
@@ -71,5 +76,10 @@ export default function AddPhoto({ albumId }) {
 				</form>
 			</div>
 		);
-	return <button onClick={() => setAddingPhoto(true)}>Add Photo</button>;
+	return (
+		<div>
+			<button onClick={() => setAddingPhoto(true)}>Add Photo</button>
+			<p>{failText}</p>
+		</div>
+	);
 }

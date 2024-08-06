@@ -59,10 +59,16 @@ function checkLoggedIn() {
 	return currUserId;
 }
 
-function getData(path, setter, options = null) {
-	return fetch(`${MAIN_URL}${path}`, options)
-		.then((res) => res.json())
-		.then((d) => setter(d));
+async function getData(path, setter, options = null) {
+	try {
+		const res = await fetch(`${MAIN_URL}${path}`, options);
+		if (res.status === 404) throw new Error("404: Not found");
+		if (!res.ok) throw new Error("Failed to fetch Data");
+		const data = await res.json();
+		setter(data);
+	} catch (err) {
+		console.error(err);
+	}
 }
 
 export { useFetch, checkLoggedIn, getData };
