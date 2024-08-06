@@ -25,5 +25,9 @@ export default function Notifications() {
 	const [NotificationsListContextState] = useContext(
 		NotificationsListContext
 	);
-	return <ul className="">{NotificationsListContextState.map()}</ul>;
+	return (
+		<ul className={styles.Notifications}>
+			{NotificationsListContextState.map()}
+		</ul>
+	);
 }
