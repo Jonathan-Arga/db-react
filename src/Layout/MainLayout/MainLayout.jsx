@@ -1,4 +1,5 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import styles from "./MainLayout.module.css";
 
 export default function Layout() {
 	const navigate = useNavigate();
@@ -11,42 +12,54 @@ export default function Layout() {
 
 	return (
 		<>
-			<span className="layout">THIS PROJECT</span>
-			<nav className="main-nav">
-				<NavLink
-					to="home"
-					className={(isActive) =>
-						isActive ? "nav-link" : "nav-link active"
-					}
-				>
-					Home
-				</NavLink>
-				<NavLink
-					to="todos"
-					className={(isActive) =>
-						isActive ? "nav-link" : "nav-link active"
-					}
-				>
-					Todos
-				</NavLink>
-				<NavLink
-					to="posts"
-					className={(isActive) =>
-						isActive ? "nav-link" : "nav-link active"
-					}
-				>
-					Posts
-				</NavLink>
-				<NavLink
-					to="albums"
-					className={(isActive) =>
-						isActive ? "nav-link" : "nav-link active"
-					}
-				>
-					Albums
-				</NavLink>
-				<button onClick={signOut}>Sign out</button>
-			</nav>
+			<header className={styles.header}>
+				<span className={styles.headerName}>THIS PROJECT</span>
+				<nav className={styles.mainNav}>
+					<NavLink
+						to="home"
+						className={({ isActive }) =>
+							isActive
+								? `${styles.navLink} ${styles.active}`
+								: `${styles.navLink}`
+						}
+					>
+						Home
+					</NavLink>
+					<NavLink
+						to="todos"
+						className={({ isActive }) =>
+							isActive
+								? `${styles.navLink} ${styles.active}`
+								: `${styles.navLink}`
+						}
+					>
+						Todos
+					</NavLink>
+					<NavLink
+						to="posts"
+						className={({ isActive }) =>
+							isActive
+								? `${styles.navLink} ${styles.active}`
+								: `${styles.navLink}`
+						}
+					>
+						Posts
+					</NavLink>
+					<NavLink
+						to="albums"
+						className={({ isActive }) =>
+							isActive
+								? `${styles.navLink} ${styles.active}`
+								: `${styles.navLink}`
+						}
+					>
+						Albums
+					</NavLink>
+					<button onClick={signOut} className={styles.signoutButton}>
+						Sign out
+					</button>
+				</nav>
+			</header>
 			<Outlet />
 		</>
 	);

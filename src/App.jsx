@@ -20,31 +20,21 @@ import Notifications from './components/Notifications/Notifications';
 
 export const MAIN_URL = 'http://localhost:3000/';
 
-export const NotificationsListContext = createContext(null);
-
 function App() {
-	const [NotificationsListContextState, SetNotificationsListContextState] =
-		useState([]);
 	return (
-		<>
-			<BrowserRouter>
-				<Routes>
-					<Route path="/login" element={<Login />} />
-					<Route path="/register" element={<Register />} />
-					<Route path="/" element={<MainLayout />}>
-						<Route path="home" element={<Home />} />
-						<Route path="todos" element={<Todos />} />
+		<BrowserRouter>
+			<Routes>
+				<Route path="/login" element={<Login />} />
+				<Route path="/register" element={<Register />} />
+				<Route path="/" element={<MainLayout />}>
+					<Route path="home" element={<Home />} />
+					<Route path="todos" element={<Todos />} />
 
-						<Route path="posts" element={<PostsLayout />}>
-							<Route index element={<Posts />} />
-							<Route path=":postid" element={<PostPage />} />
-						</Route>
-						<Route path="albums" element={<AlbumsLayout />}>
-							<Route index element={<Albums />} />
-							<Route path=":photoid" element={<AlbumPage />} />
-						</Route>
+					<Route path="posts" element={<PostsLayout />}>
+						<Route index element={<Posts />} />
+						<Route path=":postid" element={<PostItem />} />
+
 					</Route>
-
 					<Route path="albums" element={<AlbumsLayout />}>
 						<Route index element={<Albums />} />
 						<Route
@@ -52,9 +42,9 @@ function App() {
 							element={<AlbumPage />}
 						/>
 					</Route>
-				</Routes>
-			</BrowserRouter>
-		</>
+				</Route>
+			</Routes>
+		</BrowserRouter>
 	);
 }
 

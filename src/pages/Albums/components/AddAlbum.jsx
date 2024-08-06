@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { checkLoggedIn } from "../../../util";
+import styles from "../css/Albums.module.css";
 
 export default function AddAlbum() {
 	const [addingAlbum, setAddingAlbum] = useState(false);
@@ -41,16 +42,23 @@ export default function AddAlbum() {
 
 	if (addingAlbum)
 		return (
-			<div>
+			<div className={styles.dialog}>
 				<p>What's the title for your album?</p>
 				<form onSubmit={addAlbum}>
 					<input
 						type="text"
+						placeholder="Album Title"
 						value={newTitle}
+						className={styles.inputBox}
 						onChange={(e) => setNewTitle(e.target.value)}
 					/>
-					<button>Add</button>
-					<button type="button" onClick={() => setAddingAlbum(false)}>
+					<br />
+					<button className={styles.albumButton}>Add</button>
+					<button
+						type="button"
+						onClick={() => setAddingAlbum(false)}
+						className={styles.albumButton}
+					>
 						Cancel
 					</button>
 				</form>
@@ -59,8 +67,11 @@ export default function AddAlbum() {
 		);
 
 	return (
-		<div>
-			<button onClick={() => setAddingAlbum(true)}>Add Album</button>
-		</div>
+		<button
+			onClick={() => setAddingAlbum(true)}
+			className={styles.lightAlbumButton}
+		>
+			Add Album
+		</button>
 	);
 }
