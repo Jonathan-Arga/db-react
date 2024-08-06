@@ -27,7 +27,7 @@ export default function Notifications() {
 	);
 	return (
 		<ul className={styles.Notifications}>
-			{NotificationsListContextState.map()}
+			{NotificationsListContextState.map((item) => item)}
 		</ul>
 	);
 }

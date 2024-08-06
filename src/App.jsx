@@ -15,25 +15,25 @@ import MainLayout from './Layout/MainLayout/MainLayout';
 
 import './App.css';
 import { createContext, useState } from 'react';
-import Notifications from './components/Notifications/Notifications';
+// import Notifications from './components/Notifications/Notifications';
 
 export const MAIN_URL = 'http://localhost:3000/';
 
 export const NotificationsListContext = createContext(null);
 
 function App() {
-	const [NotificationsListContextState, SetNotificationsListContextState] =
-		useState([]);
+	// const [NotificationsListContextState, SetNotificationsListContextState] =
+	// 	useState([]);
 	return (
 		<>
-			<NotificationsListContext.Provider
+			{/* <NotificationsListContext.Provider
 				value={[
 					NotificationsListContextState,
 					SetNotificationsListContextState,
 				]}
 			>
 				<Notifications />
-			</NotificationsListContext.Provider>
+			</NotificationsListContext.Provider> */}
 			<BrowserRouter>
 				<Routes>
 					<Route path="/login" element={<Login />} />
