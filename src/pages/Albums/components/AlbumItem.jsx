@@ -1,3 +1,11 @@
-export default function AlbumItem() {
-	return <h2>Album Item</h2>;
+import { Link } from "react-router-dom";
+
+export default function AlbumItem({ album }) {
+	return (
+		<li>
+			<h2>Album Title: {album.title}</h2>
+			<p>Album ID: {album.id}</p>
+			<Link to={`${album.id}`}>Look at album</Link>
+		</li>
+	);
 }

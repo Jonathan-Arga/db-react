@@ -7,13 +7,15 @@ import Todos from "./pages/Todos/Todos";
 import Posts from "./pages/Posts/Posts";
 import PostItem from "./pages/Posts/components/PostItem";
 import Albums from "./pages/Albums/Albums";
-import AlbumItem from "./pages/Albums/components/AlbumItem";
+import AlbumPage from "./pages/Albums/components/AlbumPage";
+import PhotoPage from "./pages/Albums/components/PhotoPage";
 
 import AlbumsLayout from "./Layout/AlbumsLayout/AlbumsLayout";
 import PostsLayout from "./Layout/PostsLayout/PostsLayout";
 import MainLayout from "./Layout/MainLayout/MainLayout";
 
 import "./App.css";
+import AlbumPageLayout from "./Layout/AlbumPageLayout/AlbumPageLayout";
 
 function App() {
 	return (
@@ -30,7 +32,10 @@ function App() {
 					</Route>
 					<Route path="albums" element={<AlbumsLayout />}>
 						<Route index element={<Albums />} />
-						<Route path=":photoid" element={<AlbumItem />} />
+						<Route path=":albumid" element={<AlbumPageLayout />}>
+							<Route index element={<AlbumPage />} />
+							<Route path=":photoid" element={<PhotoPage />} />
+						</Route>
 					</Route>
 				</Route>
 			</Routes>

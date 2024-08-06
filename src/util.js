@@ -1,7 +1,6 @@
+import { useEffect, useRef, useState } from "react";
 
-import { useEffect, useRef, useState } from 'react';
-
-const MAIN_URL = 'http://localhost:3000/';
+const MAIN_URL = "http://localhost:3000/";
 
 export const useIsMount = () => {
 	const isMountRef = useRef(true);
@@ -13,8 +12,8 @@ export const useIsMount = () => {
 
 function useFetch() {
 	const isMount = useIsMount();
-	const [path, setPath] = useState('');
-	const [options, setOptions] = useState({ method: 'GET', data: {} });
+	const [path, setPath] = useState("");
+	const [options, setOptions] = useState({ method: "GET", data: {} });
 
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +21,7 @@ function useFetch() {
 
 	const setRequest = (
 		newPath,
-		newOptions = { method: 'GET', body: undefined }
+		newOptions = { method: "GET", body: undefined }
 	) => {
 		setPath(newPath);
 		setOptions(newOptions);
@@ -51,4 +50,19 @@ function useFetch() {
 	return { setRequest, isLoading, failed, data };
 }
 
-export { useFetch };
+function checkLoggedIn() {
+	const currUserId = localStorage.getItem("current");
+	if (!currUserId) {
+		alert("You are not signed in");
+		navigate("/login");
+	}
+	return currUserId;
+}
+
+function getData(path, setter, options = null) {
+	return fetch(`${MAIN_URL}${path}`, options)
+		.then((res) => res.json())
+		.then((d) => setter(d));
+}
+
+export { useFetch, checkLoggedIn, getData };
