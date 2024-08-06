@@ -5,7 +5,6 @@ import Register from './pages/Signup/Register';
 import Home from './pages/Home/Home';
 import Todos from './pages/Todos/Todos';
 import Posts from './pages/Posts/Posts';
-import PostItem from './pages/Posts/components/PostItem';
 import Albums from './pages/Albums/Albums';
 import AlbumItem from './pages/Albums/components/AlbumItem';
 
@@ -15,6 +14,7 @@ import MainLayout from './Layout/MainLayout/MainLayout';
 
 import './App.css';
 import { createContext, useState } from 'react';
+import PostPage from './pages/Posts/components/PostPage';
 
 export const MAIN_URL = 'http://localhost:3000/';
 
@@ -30,7 +30,7 @@ function App() {
 
 					<Route path="posts" element={<PostsLayout />}>
 						<Route index element={<Posts />} />
-						<Route path=":postid" element={<PostItem />} />
+						<Route path=":postid" element={<PostPage />} />
 					</Route>
 					<Route path="albums" element={<AlbumsLayout />}>
 						<Route index element={<Albums />} />

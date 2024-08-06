@@ -1,10 +1,15 @@
-.DeletePostButton:hover {
-	background-color: red;
-	animation: shake 0.5s infinite;
+.DeletePostButton {
+	transition: all 0.5s ease;
 }
 
-.DeletePostButton:focus {
+.DeletePostButton:hover {
+	background-color: red;
+}
+
+.DeletePostButtonFocused {
 	outline: 4px auto -webkit-focus-ring-color;
+	background-color: red;
+	animation: shake 0.5s infinite;
 }
 @keyframes shake {
 	0% {

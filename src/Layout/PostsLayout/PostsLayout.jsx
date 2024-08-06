@@ -26,11 +26,18 @@ export default function PostsLayout() {
 	 * @param {MouseEvent} e
 	 */
 	const HandleDeletePostClick = () => {
-		if (currentPage != 'posts')
+		if (currentPage != 'posts') {
+			let userid = location.pathname.substring(
+				location.pathname.lastIndexOf('/') + 1
+			);
+			userid = userid.substring(0, userid.indexOf('/'));
+			if (localStorage.getItem('current') !== userid)
+				return alert('You are not authorized to delete this post.');
 			// delete currentpage cause its a post
 			return fetch(MAIN_URL + `posts/${currentPage}`, {
 				method: 'DELETE',
 			}).then(() => redirect('/posts'));
+		}
 		SetDeletingPostsContextState(
 			(prevIsDeletingPosts) => !prevIsDeletingPosts
 		);
@@ -56,7 +63,11 @@ export default function PostsLayout() {
 						false
 					)}
 					<button
-						className={styles.DeletePostButton}
+						className={
+							DeletingPostsContextState
+								? [styles.DeletePostButtonFocused]
+								: [styles.DeletePostButton]
+						}
 						ref={deletionButtonRef}
 						onClick={HandleDeletePostClick}
 					>
