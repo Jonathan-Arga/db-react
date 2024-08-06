@@ -8,11 +8,12 @@ export default function DeletePhoto() {
 		e.preventDefault();
 		setDelteingPhoto(false);
 
-		fetch(`http://localhost:3000/photos/${id}`, {
+		const res = await fetch(`http://localhost:3000/photos/${id}`, {
 			method: "DELETE",
 		});
 
 		setId("");
+		window.location.reload();
 	}
 
 	if (deletingPhoto)

@@ -32,10 +32,13 @@ export default function AddPhoto({ albumId }) {
 		setNewURL("");
 		setNewThumbnail("");
 
-		fetch("http://localhost:3000/photos", {
+		const res2 = await fetch("http://localhost:3000/photos", {
 			method: "POST",
 			body: JSON.stringify(newPhoto),
 		});
+		if (res2.ok) {
+			window.location.reload();
+		}
 	}
 
 	if (addingPhoto)

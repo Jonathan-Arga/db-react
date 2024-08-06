@@ -15,7 +15,6 @@ import PostsLayout from "./Layout/PostsLayout/PostsLayout";
 import MainLayout from "./Layout/MainLayout/MainLayout";
 
 import "./App.css";
-import AlbumPageLayout from "./Layout/AlbumPageLayout/AlbumPageLayout";
 
 function App() {
 	return (
@@ -32,10 +31,10 @@ function App() {
 					</Route>
 					<Route path="albums" element={<AlbumsLayout />}>
 						<Route index element={<Albums />} />
-						<Route path=":albumid" element={<AlbumPageLayout />}>
-							<Route index element={<AlbumPage />} />
-							<Route path=":photoid" element={<PhotoPage />} />
-						</Route>
+						<Route
+							path=":albumid/:pageid"
+							element={<AlbumPage />}
+						/>
 					</Route>
 				</Route>
 			</Routes>

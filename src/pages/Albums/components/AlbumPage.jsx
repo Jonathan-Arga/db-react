@@ -4,34 +4,55 @@ import { checkLoggedIn, getData } from "../../../util";
 import AddPhoto from "./AddPhoto";
 import DeletePhoto from "./DeletePhoto";
 
+const PHOTOS_PER_PAGE = 10;
+
 export default function AlbumPage() {
-	const { albumid } = useParams();
+	const { albumid, pageid } = useParams();
+	const [albumId, pageId] = [parseInt(albumid), parseInt(pageid)];
 	const [photos, setPhotos] = useState(null);
 	const userRef = useRef(null);
-	const { photoIdRef } = useOutletContext();
+	const [album, setAlbum] = useState(null);
 
 	useEffect(() => {
 		userRef.current = checkLoggedIn();
 		if (!userRef.current) {
 			return null;
 		}
+		getData(`albums/${albumId}`, setAlbum);
 		getData(`photos`, setPhotos);
 	}, []);
 
-	const albumPhotos = photos
-		? photos.filter((photo) => photo.albumId == albumid)
-		: null;
+	const albumPhotos =
+		photos && photos.filter((photo) => photo.albumId == albumId);
+	const pagePhotos =
+		albumPhotos &&
+		albumPhotos.filter(
+			(_, index) =>
+				index >= (pageId - 1) * PHOTOS_PER_PAGE &&
+				index < pageId * PHOTOS_PER_PAGE
+		);
 
 	return (
 		<>
-			<AddPhoto albumId={albumid} />
+			<h2>Album: {album && album.title}</h2>
+			<AddPhoto albumId={albumId} />
 			<DeletePhoto />
-			{albumPhotos &&
-				albumPhotos.map((photo) => (
-					<Link to={photo.id} key={photo.id}>
-						<img src={photo.thumbnailUrl} />
-					</Link>
+			{pagePhotos &&
+				pagePhotos.map((photo) => (
+					<img key={photo.id} src={photo.thumbnailUrl} />
 				))}
+			{pageId > 1 && (
+				<Link to={`../${parseInt(pageId) - 1}`} relative="path">
+					Last Page
+				</Link>
+			)}
+			{pagePhotos &&
+				pagePhotos.length + (pageId - 1) * PHOTOS_PER_PAGE <
+					albumPhotos.length && (
+					<Link to={`../${parseInt(pageId) + 1}`} relative="path">
+						Next Page
+					</Link>
+				)}
 		</>
 	);
 }
