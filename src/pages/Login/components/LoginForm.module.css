@@ -1,4 +1,4 @@
-.signupForm {
+.loginForm {
 	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 	display: grid;
 	justify-self: center;
@@ -8,7 +8,7 @@
 	background-color: rgb(54, 54, 54);
 	border-radius: 12px;
 }
-.signupForm input {
+.loginForm input {
 	justify-self: center;
 	border: none;
 	border-radius: 6px;
