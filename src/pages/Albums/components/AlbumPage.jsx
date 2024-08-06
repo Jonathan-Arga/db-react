@@ -3,7 +3,7 @@ import { Link, useOutletContext, useParams } from "react-router-dom";
 import { checkLoggedIn, getData } from "../../../util";
 import AddPhoto from "./AddPhoto";
 import DeletePhoto from "./DeletePhoto";
-
+import styles from "../css/AlbumPage.module.css";
 const PHOTOS_PER_PAGE = 10;
 
 export default function AlbumPage() {
@@ -41,20 +41,36 @@ export default function AlbumPage() {
 			<h2>Album: {album && album.title}</h2>
 			<AddPhoto albumId={albumId} />
 			<DeletePhoto />
-			{pagePhotos &&
-				pagePhotos.map((photo) => (
-					<img key={photo.id} src={photo.thumbnailUrl} />
-				))}
-			{pageId > 1 && (
-				<Link to={`../${parseInt(pageId) - 1}`} relative="path">
-					Last Page
-				</Link>
-			)}
-			{showNextPageButon && (
-				<Link to={`../${parseInt(pageId) + 1}`} relative="path">
-					Next Page
-				</Link>
-			)}
+			<div className={styles.imageContainer}>
+				{pagePhotos &&
+					pagePhotos.map((photo) => (
+						<img
+							key={photo.id}
+							src={photo.thumbnailUrl}
+							className={styles.albumImage}
+						/>
+					))}
+			</div>
+			<div className={styles.buttonContainer}>
+				{pageId > 1 && (
+					<Link
+						to={`../${parseInt(pageId) - 1}`}
+						relative="path"
+						className={styles.pageButton}
+					>
+						Last Page
+					</Link>
+				)}
+				{showNextPageButon && (
+					<Link
+						to={`../${parseInt(pageId) + 1}`}
+						relative="path"
+						className={styles.pageButton}
+					>
+						Next Page
+					</Link>
+				)}
+			</div>
 		</>
 	);
 }

@@ -1,0 +1,76 @@
+.albumList {
+	list-style-type: none;
+}
+
+.albumItem {
+	background-color: black;
+	border-radius: 20px;
+	padding: 5px;
+	margin: 10px;
+	border: 1px solid black;
+	transition: all 0.2s;
+}
+
+.albumItem:hover {
+	border: 1px solid gray;
+	background-color: rgb(53, 53, 53);
+}
+
+.albumTitle {
+	color: white;
+	margin-bottom: 0;
+	padding: 0 10px;
+}
+
+.albumId {
+	display: inline-block;
+	color: lightgray;
+}
+
+.search {
+	background-color: rgb(112, 112, 112);
+	padding: 5px;
+	border-radius: 20px;
+}
+
+.inputBox {
+	width: 60vw;
+	height: 40px;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+.selectBox {
+	width: 10vw;
+	height: 40px;
+	box-sizing: border-box;
+	text-align: center;
+	border-radius: 5px;
+	background-color: black;
+}
+
+.albumButton {
+	margin: 10px 20px;
+	padding: 8px 12px;
+}
+
+.lightAlbumButton {
+	color: black;
+	background-color: lightgray;
+	margin: 10px 20px;
+	padding: 8px 12px;
+}
+
+.dialog {
+	color: black;
+	background-color: lightgray;
+	border-radius: 20px;
+}
+
+.dialog p {
+	margin: 5px;
+}
+
+.dialog input {
+	border-radius: 5px;
+}

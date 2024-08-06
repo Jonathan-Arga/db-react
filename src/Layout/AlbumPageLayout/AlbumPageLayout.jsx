@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import { getData } from "../../util";
+import styles from "../../pages/Albums/css/AlbumPage.module.css";
 
 export default function AlbumPageLayout() {
 	const { albumid } = useParams();
@@ -11,7 +12,9 @@ export default function AlbumPageLayout() {
 	}, []);
 	return (
 		<>
-			<h2>Album: {album && album.title}</h2>
+			<h2 className={styles.layoutHeader}>
+				Album: {album && album.title}
+			</h2>
 			<Outlet />
 		</>
 	);
