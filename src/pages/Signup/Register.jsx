@@ -7,7 +7,7 @@ export default function Register() {
 		<>
 			<EntryHeader />
 			<RegisterForm />
-			<NavLink to='/login'>Already have an account? Login here!</NavLink>
+			<NavLink to="/login">Already have an account? Login here!</NavLink>
 		</>
 	);
 }

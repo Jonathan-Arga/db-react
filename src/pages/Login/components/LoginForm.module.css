@@ -2,8 +2,8 @@
 	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 	display: grid;
 	justify-self: center;
+	grid-template-columns: 1fr;
 
-	gap: 12px;
 	padding: 12px;
 	background-color: rgb(54, 54, 54);
 	border-radius: 12px;
@@ -13,4 +13,13 @@
 	border: none;
 	border-radius: 6px;
 	padding: 12px;
+	width: 75%;
+	margin: 12px 6px;
+}
+.alone {
+	grid-column: 1 / -1;
+}
+.loginForm button {
+	grid-column: 1 / -1;
+	background-color: green;
 }
