@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useEffect, useRef } from 'react';
-import { useFetch } from '../../../util';
+import { useRef } from 'react';
 import styles from './RegisterForm.module.css';
+import { Navigate } from 'react-router-dom';
 
 export default function RegisterForm() {
 	const nameRef = useRef();
@@ -9,46 +9,87 @@ export default function RegisterForm() {
 	const usernameRef = useRef();
 	const passwordRef = useRef();
 	const repeatPasswordRef = useRef();
-
-	const users = useFetch();
-	const postData = useFetch();
+	const errorRef = useRef();
 
 	/**
 	 * @param {React.FormEvent} e
 	 */
 	const submitHandler = (e) => {
 		e.preventDefault();
+		if (passwordRef.current.value != repeatPasswordRef.current.value)
+			return (errorRef.current.textContent = "Passwords don't match!");
+		fetch('http://localhost:3000/users')
+			.then((res) => res.json())
+			.then((data) => {
+				if (
+					data.find(
+						(user) => user['username'] == usernameRef.current.value
+					)
+				)
+					return (errorRef.current.textContent =
+						'Username already exists!');
+				const myUser = {
+					id: data.length + 1,
+					name: nameRef.current.value,
+					username: usernameRef.current.value,
+					email: emailRef.current.value,
+					website: passwordRef.current.value,
+				};
+				fetch('http://localhost:3000/users', {
+					method: 'POST',
+					body: JSON.stringify(myUser),
+				}).then((res) => {
+					if (res.ok) localStorage.setItem('current', myUser.id);
+				});
+			});
 	};
-	useEffect(() => {
-		postData.setRequest('users', {
-			method: 'POST',
-			body: {
-				'id': users.data.length,
-				'name': nameRef.current.value,
-				'username': usernameRef.current.value,
-				'email': emailRef.current.value,
-				'website': passwordRef.current.value,
-			},
-		});
-	});
+
 	return (
-		<form className={styles.signupForm} onSubmit={submitHandler}>
-			<input ref={nameRef} type='text' placeholder='Full Name' />
-			<input ref={usernameRef} type='text' placeholder='Username' />
-			<input ref={emailRef} type='email' placeholder='Email here' />
-			<input
-				ref={passwordRef}
-				name='password'
-				type='password'
-				placeholder='Password here'
-			/>
-			<input
-				ref={repeatPasswordRef}
-				name='same-password'
-				type='password'
-				placeholder='Repeat password here'
-			/>
-			<button onSubmit={submitHandler}>Sign Up</button>
+		<form onSubmit={submitHandler}>
+			<fieldset className={styles.signupForm}>
+				<legend>Signup</legend>
+				<input
+					ref={nameRef}
+					type="text"
+					placeholder="Full Name"
+					required
+				/>
+				<input
+					ref={usernameRef}
+					type="text"
+					placeholder="Username"
+					required
+				/>
+				<input
+					ref={emailRef}
+					className={styles.alone}
+					type="email"
+					placeholder="Email here"
+					required
+				/>
+				<input
+					ref={passwordRef}
+					name="password"
+					type="password"
+					placeholder="Password here"
+					required
+				/>
+				<input
+					ref={repeatPasswordRef}
+					name="same-password"
+					type="password"
+					placeholder="Repeat password here"
+					required
+				/>
+				<button onSubmit={submitHandler}>Sign Up</button>
+				<br />
+				<p className={styles.alone} ref={errorRef}></p>
+			</fieldset>
+			{localStorage.getItem('current') ? (
+				<Navigate to="/home"></Navigate>
+			) : (
+				false
+			)}
 		</form>
 	);
 }
