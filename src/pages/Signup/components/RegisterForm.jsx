@@ -37,7 +37,7 @@ export default function RegisterForm() {
 						name: nameRef.current.value,
 						username: usernameRef.current.value,
 						email: emailRef.current.value,
-						webiste: passwordRef.current.value,
+						website: passwordRef.current.value,
 					}),
 				}).then((res) => (res.ok ? setRedirect(true) : false));
 			});
