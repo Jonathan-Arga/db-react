@@ -41,7 +41,7 @@ function App() {
 						</Route>
 						<Route path="albums" element={<AlbumsLayout />}>
 							<Route index element={<Albums />} />
-							<Route path=":photoid" element={<AlbumItem />} />
+							<Route path=":photoid" element={<AlbumPage />} />
 						</Route>
 					</Route>
 
