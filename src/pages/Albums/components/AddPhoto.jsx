@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { checkLoggedIn } from "../../../util";
 import styles from "../css/Albums.module.css";
+import { MAIN_URL } from "../../../App";
 
 export default function AddPhoto({ albumId }) {
 	const [addingPhoto, setAddingPhoto] = useState(false);
@@ -20,7 +21,7 @@ export default function AddPhoto({ albumId }) {
 		}
 		setAddingPhoto(false);
 
-		const res = await fetch("http://localhost:3000/photos");
+		const res = await fetch(MAIN_URL + "photos");
 		const photos = await res.json();
 		const maxId = photos
 			.map((photo) => parseInt(photo.id))
@@ -38,7 +39,7 @@ export default function AddPhoto({ albumId }) {
 		setNewURL("");
 		setNewThumbnail("");
 
-		const res2 = await fetch("http://localhost:3000/photos", {
+		const res2 = await fetch(MAIN_URL + "photos", {
 			method: "POST",
 			body: JSON.stringify(newPhoto),
 		});
