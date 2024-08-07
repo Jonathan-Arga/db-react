@@ -5,6 +5,7 @@ import { MAIN_URL } from '../../App';
 import styles from './PostsLayout.module.css';
 
 export const DeletingPostsContext = createContext(null);
+export const SearchingPostsContext = createContext(null);
 
 export function DeletePost(userId, postId, navigate) {
 	if (Number.parseInt(localStorage.getItem('current')) !== userId)
@@ -23,6 +24,9 @@ export default function PostsLayout() {
 	const newPostDialog = useRef();
 	const newPostTitle = useRef();
 	const newPostTextField = useRef();
+
+	const searchFieldRef = useRef();
+	const [searchingPostsState, setSearchingPostsState] = useState('');
 
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -63,73 +67,91 @@ export default function PostsLayout() {
 			});
 	};
 
-	/**
-	 * @param {MouseEvent} e
-	 */
-	const HandleNewPostClick = () => {
-		if (currentPage != 'posts') navigate('/posts');
-		newPostDialog.current.open = true;
+	const HandleSearchChange = () => {
+		console.log(searchingPostsState);
+		setSearchingPostsState(() => searchFieldRef.current.value);
+		console.log(searchingPostsState);
 	};
-	/**
-	 * @param {MouseEvent} e
-	 */
-	const HandleDeletePostClick = () => {
-		if (currentPage != 'posts') {
-			let userid = location.pathname.substring(
-				location.pathname.lastIndexOf('/') + 1
-			);
-			userid = userid.substring(0, userid.indexOf('/'));
-			DeletePost(
-				Number.parseInt(userid),
-				Number.parseInt(currentPage),
-				() => navigate('/posts')
-			);
-		} else
-			SetDeletingPostsContextState(
-				(prevIsDeletingPosts) => !prevIsDeletingPosts
-			);
-	};
+
 	return (
 		<>
-			<DeletingPostsContext.Provider
-				value={[
-					DeletingPostsContextState,
-					SetDeletingPostsContextState,
-				]}
+			<SearchingPostsContext.Provider
+				value={[searchingPostsState, setSearchingPostsState]}
 			>
-				<div className={styles.postsLayoutHeader}>
-					<div className={styles.title}>Posts</div>
-					<PostsButtons />
-				</div>
-				<PostsDialog />
-				<Outlet />
-			</DeletingPostsContext.Provider>
+				<DeletingPostsContext.Provider
+					value={[
+						DeletingPostsContextState,
+						SetDeletingPostsContextState,
+					]}
+				>
+					<div className={styles.postsLayoutHeader}>
+						<div className={styles.title}>Posts</div>
+						<input
+							ref={searchFieldRef}
+							placeholder="Search for post..."
+							type="search"
+							onChange={HandleSearchChange}
+						/>
+						<PostsButtons />
+					</div>
+					<PostsDialog />
+					<Outlet />
+				</DeletingPostsContext.Provider>
+			</SearchingPostsContext.Provider>
 		</>
 	);
 
 	function PostsButtons() {
+		/**
+		 * @param {MouseEvent} e
+		 */
+		const HandleNewPostClick = () => {
+			if (currentPage != 'posts') navigate('/posts');
+			newPostDialog.current.open = true;
+		};
+		/**
+		 * @param {MouseEvent} e
+		 */
+		const HandleDeletePostClick = () => {
+			if (currentPage != 'posts') {
+				let userid = location.pathname.substring(
+					location.pathname.lastIndexOf('/') + 1
+				);
+				userid = userid.substring(0, userid.indexOf('/'));
+				DeletePost(
+					Number.parseInt(userid),
+					Number.parseInt(currentPage),
+					() => navigate('/posts')
+				);
+			} else
+				SetDeletingPostsContextState(
+					(prevIsDeletingPosts) => !prevIsDeletingPosts
+				);
+		};
 		return (
 			<div className={styles.buttons}>
 				{currentPage === 'posts' ? (
-					<button
-						className={styles.NewPostButton}
-						onClick={HandleNewPostClick}
-					>
-						&#x2B;
-					</button>
+					<>
+						<button
+							className={styles.NewPostButton}
+							onClick={HandleNewPostClick}
+						>
+							&#x2B;
+						</button>
+						<button
+							className={
+								DeletingPostsContextState
+									? [styles.DeletePostButtonFocused]
+									: [styles.DeletePostButton]
+							}
+							onClick={HandleDeletePostClick}
+						>
+							&#128465;
+						</button>
+					</>
 				) : (
 					false
 				)}
-				<button
-					className={
-						DeletingPostsContextState
-							? [styles.DeletePostButtonFocused]
-							: [styles.DeletePostButton]
-					}
-					onClick={HandleDeletePostClick}
-				>
-					&#128465;
-				</button>
 			</div>
 		);
 	}

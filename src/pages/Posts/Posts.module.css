@@ -1,8 +1,9 @@
 .Posts {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	width: 100%;
+	width: 90dvw;
 	padding: 0;
+	margin: auto;
 }
 .Posts legend {
 	font-size: 20px;
