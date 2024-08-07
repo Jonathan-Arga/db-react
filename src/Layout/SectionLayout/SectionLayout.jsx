@@ -11,7 +11,7 @@ export function Delete(id, navigate, path, userId = null) {
 		return alert("You are not authorized to delete this post.");
 	return fetch(MAIN_URL + `${path}/${id}`, {
 		method: "DELETE",
-	}).then(() => navigate());
+	}).then(() => navigate(path));
 }
 export async function HighestID(path, idfield) {
 	const res = await fetch(`${MAIN_URL}${path}`);
@@ -127,60 +127,69 @@ export default function SectionLayout({ sectionName, fields }) {
 		return (
 			<div className={styles.buttons}>
 				{currentPage === sectionName ? (
-					<button
-						className={styles.NewButton}
-						onClick={HandleNewClick}
-					>
-						&#x2B;
-					</button>
+					<>
+						<button
+							className={styles.NewButton}
+							onClick={HandleNewClick}
+						>
+							&#x2B;
+						</button>
+						<button
+							className={
+								DeletingContextState
+									? [styles.DeleteButtonFocused]
+									: [styles.DeleteButton]
+							}
+							onClick={HandleDeleteClick}
+						>
+							&#128465;
+						</button>
+					</>
 				) : (
 					false
 				)}
-				<button
-					className={
-						DeletingContextState
-							? [styles.DeleteButtonFocused]
-							: [styles.DeleteButton]
-					}
-					onClick={HandleDeleteClick}
-				>
-					&#128465;
-				</button>
 			</div>
 		);
 	}
 	function Dialog() {
 		return (
 			<dialog className={styles.newDialog} ref={newDialog}>
-				<fieldset className={styles.newFieldset}>
-					<legend>New </legend>
-					<input
-						ref={newTitle}
-						type="text"
-						placeholder="Title"
-						required
-					/>
-					{sectionName === "posts" && (
-						<textarea
-							ref={newTextField}
-							placeholder="Content"
+				<form
+					onSubmit={(e) => {
+						e.preventDefault();
+						handleNewSubmit();
+					}}
+				>
+					<fieldset className={styles.newFieldset}>
+						<legend>New </legend>
+						<input
+							ref={newTitle}
+							type="text"
+							placeholder="Title"
 							required
 						/>
-					)}
-					<button
-						className={styles.confirmationButton}
-						onClick={handleNewSubmit}
-					>
-						Create
-					</button>
-					<button
-						type="button"
-						className={styles.cancelationButton}
-						onClick={() => newDialog.current.close()}
-					>
-						Cancel
-					</button>
-				</fieldset>
+						{sectionName === "posts" && (
+							<textarea
+								ref={newTextField}
+								placeholder="Content"
+								required
+							/>
+						)}
+						<button
+							className={styles.confirmationButton}
+							onClick={handleNewSubmit}
+						>
+							Create
+						</button>
+						<button
+							type="button"
+							className={styles.cancelationButton}
+							onClick={() => newDialog.current.close()}
+						>
+							Cancel
+						</button>
+					</fieldset>
+				</form>
 			</dialog>
 		);
 	}

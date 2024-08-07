@@ -3,16 +3,20 @@ import { MAIN_URL } from "../../App";
 import PostItem from "./components/PostItem";
 import styles from "./Posts.module.css";
 import { DeletingContext } from "../../Layout/SectionLayout/SectionLayout";
+import { checkLoggedIn, getData } from "../../util";
+import { useNavigate } from "react-router-dom";
 
 export default function Posts() {
 	const [posts, setPosts] = useState([]);
 	const [isDeletingPosts] = useContext(DeletingContext);
 	const [currentSearch, setCurrentSearch] = useState("");
+	const navigate = useNavigate();
+
 	useEffect(() => {
-		fetch(MAIN_URL + "posts")
-			.then((response) => response.json())
-			.then((data) => setPosts(data))
-			.catch((err) => console.error(err));
+		if (!checkLoggedIn()) {
+			navigate("../login");
+		}
+		getData("posts", setPosts);
 	}, []);
 	const isSearching = (item) =>
 		!currentSearch ||

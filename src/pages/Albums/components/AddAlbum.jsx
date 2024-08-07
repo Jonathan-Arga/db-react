@@ -1,29 +1,33 @@
-
 import { useState } from "react";
 import { checkLoggedIn } from "../../../util";
 import styles from "../css/Albums.module.css";
 import { MAIN_URL } from "../../../App";
+import { useNavigate } from "react-router-dom";
 
 export default function AddAlbum() {
 	const [addingAlbum, setAddingAlbum] = useState(false);
-	const [newTitle, setNewTitle] = useState('');
-	const [failText, setFailText] = useState('');
+	const [newTitle, setNewTitle] = useState("");
+	const [failText, setFailText] = useState("");
+	const navigate = useNavigate();
 
 	async function addAlbum(e) {
 		e.preventDefault();
-		setFailText('');
+		setFailText("");
 
-		const currUserId = checkLoggedIn(useNavigate());
-		if (!currUserId) return;
-		if (newTitle.trim() === '') {
-			setFailText('Empty Title');
+		const currUserId = checkLoggedIn();
+		if (!currUserId) {
+			navigate("../login");
+			return;
+		}
+		if (newTitle.trim() === "") {
+			setFailText("Empty Title");
 			return;
 		}
 
 		setAddingAlbum(false);
 
 		const res = await fetch(MAIN_URL + "albums");
-    
+
 		const albums = await res.json();
 		const maxId = albums
 			.map((album) => parseInt(album.id))
@@ -35,7 +39,7 @@ export default function AddAlbum() {
 			id: maxId + 1,
 		};
 
-		setNewTitle('');
+		setNewTitle("");
 
 		const res2 = await fetch(MAIN_URL + "albums", {
 			method: "POST",

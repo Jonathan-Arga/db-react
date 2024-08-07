@@ -7,9 +7,9 @@ export default function NavigateHome() {
 
 	useEffect(() => {
 		if (checkLoggedIn()) {
-			navigate("home");
+			navigate("/home");
 		} else {
-			navigate("login");
+			navigate("/login");
 		}
 	}, []);
 }

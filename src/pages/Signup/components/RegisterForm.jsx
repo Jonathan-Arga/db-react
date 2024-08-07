@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useRef } from "react";
 import styles from "./RegisterForm.module.css";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { MAIN_URL } from "../../../App";
 
 export default function RegisterForm() {
@@ -11,6 +11,7 @@ export default function RegisterForm() {
 	const passwordRef = useRef();
 	const repeatPasswordRef = useRef();
 	const errorRef = useRef();
+	const navigate = useNavigate();
 
 	/**
 	 * @param {React.FormEvent} e
@@ -30,7 +31,7 @@ export default function RegisterForm() {
 					return (errorRef.current.textContent =
 						"Username already exists!");
 				const myUser = {
-					id: data.length + 1,
+					id: (data.length + 1).toString(),
 					name: nameRef.current.value,
 					username: usernameRef.current.value,
 					email: emailRef.current.value,
@@ -40,7 +41,10 @@ export default function RegisterForm() {
 					method: "POST",
 					body: JSON.stringify(myUser),
 				}).then((res) => {
-					if (res.ok) localStorage.setItem("current", myUser.id);
+					if (res.ok) {
+						localStorage.setItem("current", myUser.id);
+						navigate("/home");
+					}
 				});
 			});
 	};

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { checkLoggedIn } from "../../../util";
 import styles from "../css/Albums.module.css";
 import { MAIN_URL } from "../../../App";
+import { useNavigate } from "react-router-dom";
 
 export default function AddPhoto({ albumId }) {
 	const [addingPhoto, setAddingPhoto] = useState(false);
@@ -9,12 +10,17 @@ export default function AddPhoto({ albumId }) {
 	const [newURL, setNewURL] = useState("");
 	const [newThumbnail, setNewThumbnail] = useState("");
 	const [failText, setFailText] = useState("");
+	const navigate = useNavigate();
 
 	async function addPhoto(e) {
 		e.preventDefault();
 
 		const currUserId = checkLoggedIn();
-		if (!currUserId) return;
+		if (!currUserId) {
+			navigate("/login");
+			return;
+		}
+
 		if (newTitle.trim() === "") {
 			setFailText("Empty Title");
 			return;

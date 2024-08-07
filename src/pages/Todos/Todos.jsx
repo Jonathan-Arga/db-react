@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { checkLoggedIn, getData } from "../../util";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./css/Todos.module.css";
 import TodoSort from "./components/TodoSort";
 import TodoSearch from "./components/TodoSearch";
@@ -11,6 +11,7 @@ export default function Todos() {
 	let userRef = useRef(null);
 	const [todos, setTodos] = useState(null);
 	const [searchParams, setSearchParams] = useSearchParams();
+	const navigate = useNavigate();
 
 	const sortBy = searchParams.get("sort") || "id";
 	const searchBy = searchParams.get("searchBy") || "blank";
@@ -27,7 +28,7 @@ export default function Todos() {
 	useEffect(() => {
 		userRef.current = checkLoggedIn();
 		if (!userRef.current) {
-			return null;
+			navigate("/login");
 		}
 		getData("todos", setTodos);
 	}, []);

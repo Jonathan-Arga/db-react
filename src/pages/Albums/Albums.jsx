@@ -33,7 +33,6 @@ export default function Albums() {
 		userRef.current = checkLoggedIn();
 		if (!userRef.current) {
 			navigate("../login");
-			return null;
 		}
 		getData("albums", setAlbums);
 	}, []);

@@ -22,8 +22,7 @@ export default function AlbumPage() {
 	useEffect(() => {
 		userRef.current = checkLoggedIn();
 		if (!userRef.current) {
-			navigate("../login");
-			return null;
+			navigate("/login");
 		}
 		getData(`albums/${albumId}`, setAlbum);
 		getData(`photos`, setPhotos);
