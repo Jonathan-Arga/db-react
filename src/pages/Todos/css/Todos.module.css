@@ -1,0 +1,29 @@
+.todoList {
+	list-style-type: none;
+	text-align: left;
+	padding: 0;
+}
+
+.todoItem {
+	display: flex;
+	align-items: center;
+	margin: 10px 0;
+	background-color: black;
+	border-radius: 20px;
+	padding: 5px 10px;
+	transition: all 200ms;
+}
+
+.todoItem:hover {
+	background-color: rgb(56, 56, 56);
+}
+
+.todoItem h2 {
+	margin-left: 20px;
+}
+
+.todoItem p {
+	margin-left: 10px;
+	color: gray;
+	min-width: 60px;
+}
