@@ -9,11 +9,13 @@ import PostPage from "./pages/Posts/components/PostPage";
 import Albums from "./pages/Albums/Albums";
 import AlbumPage from "./pages/Albums/components/AlbumPage";
 
+import AlbumsLayout from "./Layout/AlbumsLayout/AlbumsLayout";
+import PostsLayout from "./Layout/PostsLayout/PostsLayout";
 import MainLayout from "./Layout/MainLayout/MainLayout";
 
 import "./App.css";
+import PostItem from "./pages/Posts/components/PostItem";
 import NavigateHome from "./Layout/MainLayout/NavigateHome";
-import SectionLayout from "./Layout/SectionLayout/SectionLayout";
 
 export const MAIN_URL = "http://localhost:3000/";
 
