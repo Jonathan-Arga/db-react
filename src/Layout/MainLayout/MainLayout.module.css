@@ -32,3 +32,21 @@
 	color: white;
 	background-color: rgb(63, 63, 63);
 }
+
+.homeLinkContainer {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.homeLink {
+	background-color: black;
+	padding: 20px 30px;
+	border-radius: 10px;
+	color: lightgray;
+	transition: all 0.2s;
+}
+
+.homeLink h2,
+.homeLink p {
+	margin: 5px;
+}
