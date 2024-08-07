@@ -55,37 +55,30 @@ export default function PostPage() {
 		)
 			return alert('Please fill out all fields.');
 		setComments(undefined);
-		fetch(MAIN_URL + 'comments')
+		fetch(
+			MAIN_URL +
+				`users/${Number.parseInt(localStorage.getItem('current'))}`
+		)
 			.then((res) => res.json())
-			.then(async (data) =>
-				fetch(MAIN_URL + 'comments', {
-					method: 'POST',
-					body: JSON.stringify({
-						postId: Number.parseInt(postid),
-						id: ((await HighestID(data, 'id')) + 1).toString(),
-						name: commentTitleRef.current.value,
-						email: user['email'],
-						body: commentBodyRef.current.value,
-					}),
-				}).then(() => fetchComments())
-			);
-		console.log(
-			JSON.stringify({
-				'postId': Number.parseInt(postid),
-				'id': (500 + 1).toString(),
-				'name': commentTitleRef.current.value,
-				'email': user['email'],
-				'body': commentBodyRef.current.value,
-			})
-		);
+			.then((commentingUser) => {
+				fetch(MAIN_URL + 'comments')
+					.then((res) => res.json())
+					.then(async (data) =>
+						fetch(MAIN_URL + 'comments', {
+							method: 'POST',
+							body: JSON.stringify({
+								postId: Number.parseInt(postid),
+								id: (
+									(await HighestID(data, 'id')) + 1
+								).toString(),
+								name: commentTitleRef.current.value,
+								email: commentingUser['email'],
+								body: commentBodyRef.current.value,
+							}),
+						}).then(() => fetchComments())
+					);
+			});
 	};
-	// {
-	// 		"postId": 1,
-	// 		"id": "1",
-	// 		"name": "id labore ex et quam laborum",
-	// 		"email": "Eliseo@gardner.biz",
-	// 		"body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
-	// 	}
 
 	return (
 		<>
