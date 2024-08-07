@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { checkLoggedIn } from '../../../util';
-import styles from '../css/Albums.module.css';
-import { useNavigate } from 'react-router-dom';
+
+import { useState } from "react";
+import { checkLoggedIn } from "../../../util";
+import styles from "../css/Albums.module.css";
+import { MAIN_URL } from "../../../App";
 
 export default function AddAlbum() {
 	const [addingAlbum, setAddingAlbum] = useState(false);
@@ -21,7 +22,8 @@ export default function AddAlbum() {
 
 		setAddingAlbum(false);
 
-		const res = await fetch('http://localhost:3000/albums');
+		const res = await fetch(MAIN_URL + "albums");
+    
 		const albums = await res.json();
 		const maxId = albums
 			.map((album) => parseInt(album.id))
@@ -35,8 +37,8 @@ export default function AddAlbum() {
 
 		setNewTitle('');
 
-		const res2 = await fetch('http://localhost:3000/albums', {
-			method: 'POST',
+		const res2 = await fetch(MAIN_URL + "albums", {
+			method: "POST",
 			body: JSON.stringify(newAlbum),
 		});
 	}
