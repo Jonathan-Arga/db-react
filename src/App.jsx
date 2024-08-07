@@ -1,23 +1,22 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Login from "./pages/Login/Login";
-import Register from "./pages/Signup/Register";
-import Home from "./pages/Home/Home";
-import Todos from "./pages/Todos/Todos";
-import Posts from "./pages/Posts/Posts";
-import PostPage from "./pages/Posts/components/PostPage";
-import Albums from "./pages/Albums/Albums";
-import AlbumPage from "./pages/Albums/components/AlbumPage";
+import Login from './pages/Login/Login';
+import Register from './pages/Signup/Register';
+import Home from './pages/Home/Home';
+import Todos from './pages/Todos/Todos';
+import Posts from './pages/Posts/Posts';
+import PostPage from './pages/Posts/components/PostPage';
+import Albums from './pages/Albums/Albums';
+import AlbumPage from './pages/Albums/components/AlbumPage';
 
-import AlbumsLayout from "./Layout/AlbumsLayout/AlbumsLayout";
-import PostsLayout from "./Layout/PostsLayout/PostsLayout";
-import MainLayout from "./Layout/MainLayout/MainLayout";
+import AlbumsLayout from './Layout/AlbumsLayout/AlbumsLayout';
+import PostsLayout from './Layout/PostsLayout/PostsLayout';
+import MainLayout from './Layout/MainLayout/MainLayout';
 
-import "./App.css";
-import PostItem from "./pages/Posts/components/PostItem";
-import NavigateHome from "./Layout/MainLayout/NavigateHome";
+import './App.css';
+import NavigateHome from './Layout/MainLayout/NavigateHome';
 
-export const MAIN_URL = "http://localhost:3000/";
+export const MAIN_URL = 'http://localhost:3000/';
 
 function App() {
 	return (
@@ -32,7 +31,7 @@ function App() {
 
 					<Route path="posts" element={<PostsLayout />}>
 						<Route index element={<Posts />} />
-						<Route path=":postid" element={<PostItem />} />
+						<Route path=":postid" element={<PostPage />} />
 					</Route>
 					<Route path="albums" element={<AlbumsLayout />}>
 						<Route index element={<Albums />} />
