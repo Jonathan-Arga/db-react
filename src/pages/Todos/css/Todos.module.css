@@ -3,6 +3,12 @@
 	text-align: left;
 	padding: 0;
 }
+.TodosHeader {
+	display: flex;
+	width: fit-content;
+	gap: 12px;
+	margin: auto;
+}
 
 .todoItem {
 	display: flex;
@@ -16,6 +22,7 @@
 
 .todoItem:hover {
 	background-color: rgb(56, 56, 56);
+	cursor: pointer;
 }
 
 .todoItem h2 {
@@ -24,6 +31,6 @@
 
 .todoItem p {
 	margin-left: 10px;
-	color: gray;
+	color: rgb(175, 175, 175);
 	min-width: 60px;
 }

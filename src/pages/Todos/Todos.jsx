@@ -1,20 +1,20 @@
-import { useEffect, useRef, useState } from "react";
-import { checkLoggedIn, getData } from "../../util";
-import { useSearchParams } from "react-router-dom";
-import styles from "./css/Todos.module.css";
-import TodoSort from "./components/TodoSort";
-import TodoSearch from "./components/TodoSearch";
-import TodoItem from "./components/TodoItem";
-import AddItem from "./components/AddItem";
+import { useEffect, useRef, useState } from 'react';
+import { checkLoggedIn, getData } from '../../util';
+import { useSearchParams } from 'react-router-dom';
+import styles from './css/Todos.module.css';
+import TodoSort from './components/TodoSort';
+import TodoSearch from './components/TodoSearch';
+import TodoItem from './components/TodoItem';
+import AddItem from './components/AddItem';
 
 export default function Todos() {
 	let userRef = useRef(null);
 	const [todos, setTodos] = useState(null);
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	const sortBy = searchParams.get("sort") || "id";
-	const searchBy = searchParams.get("searchBy") || "blank";
-	const query = searchParams.get("query") || "";
+	const sortBy = searchParams.get('sort') || 'id';
+	const searchBy = searchParams.get('searchBy') || 'blank';
+	const query = searchParams.get('query') || '';
 
 	const userTodos =
 		todos && todos.filter((todo) => todo.userId == userRef.current);
@@ -29,13 +29,15 @@ export default function Todos() {
 		if (!userRef.current) {
 			return null;
 		}
-		getData("todos", setTodos);
+		getData('todos', setTodos);
 	}, []);
 
 	return (
 		<>
-			<TodoSort />
-			<TodoSearch />
+			<div className={styles.TodosHeader}>
+				<TodoSort />
+				<TodoSearch />
+			</div>
 			<AddItem />
 			<ul className={styles.todoList}>
 				{sortedTodos ? (

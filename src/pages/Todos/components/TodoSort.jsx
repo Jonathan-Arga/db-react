@@ -1,9 +1,11 @@
-import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+
+import styles from './TodoSort.module.css';
 
 export default function TodoSort() {
 	const [searchParams, setSearchParams] = useSearchParams();
-	const [sortBy, setSortBy] = useState(searchParams.get("sort") || "id");
+	const [sortBy, setSortBy] = useState(searchParams.get('sort') || 'id');
 
 	function changeSort(e) {
 		setSortBy(e.target.value);
@@ -14,7 +16,7 @@ export default function TodoSort() {
 	}
 
 	return (
-		<fieldset>
+		<fieldset className={styles.TodoSort}>
 			<legend>Sort</legend>
 			<select value={sortBy} onChange={changeSort}>
 				<option value="id">ID</option>
