@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { checkLoggedIn, getData } from "../../util";
 import { useSearchParams } from "react-router-dom";
-// import AlbumItem from "./components/AlbumItem";
-// import AlbumSearch from "./components/AlbumSearch";
-// import AddAlbum from "./components/AddAlbum";
 import styles from "./css/Todos.module.css";
 import TodoSort from "./components/TodoSort";
 import TodoSearch from "./components/TodoSearch";
