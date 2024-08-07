@@ -99,19 +99,32 @@ export default function PostPage() {
 							-{user['username']}
 						</div>
 					</div>
-					<div className={styles.postPageBody}>{post['body']}</div>
-					<div className={styles.postPageNewComment}>
+					<div
+						onKeyDown={(ev) =>
+							ev.key === 'Enter'
+								? newComment()
+								: console.log(ev.key)
+						}
+						className={styles.postPageBody}
+					>
+						{post['body']}
+					</div>
+					<div
+						onKeyDown={(ev) =>
+							ev.key === 'Enter' ? newComment() : false
+						}
+						className={styles.postPageNewComment}
+					>
 						<input ref={commentTitleRef} placeholder="Title" />
-						<br />
 						<textarea
 							ref={commentBodyRef}
 							placeholder="Comment..."
 						/>
 						<button onClick={newComment}>Send</button>
 					</div>
-					{comments ? (
-						<div className="postPageComments">
-							{comments.toReversed().map((comment) => (
+					<div className={styles.postPageComments}>
+						{comments ? (
+							comments.toReversed().map((comment) => (
 								<fieldset
 									key={JSON.stringify(comment)}
 									className="postComment"
@@ -126,11 +139,11 @@ export default function PostPage() {
 										{comment['body']}
 									</div>
 								</fieldset>
-							))}
-						</div>
-					) : (
-						<div>Loading Comments...</div>
-					)}
+							))
+						) : (
+							<div>Loading Comments...</div>
+						)}
+					</div>
 				</div>
 			) : (
 				<div>Loading...</div>
