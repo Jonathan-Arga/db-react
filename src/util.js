@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
-const MAIN_URL = "http://localhost:3000/";
+import { MAIN_URL } from "./App";
 
 export const useIsMount = () => {
 	const isMountRef = useRef(true);

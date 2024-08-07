@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "../css/Albums.module.css";
+import { MAIN_URL } from "../../../App";
 
 export default function DeletePhoto() {
 	const [deletingPhoto, setDelteingPhoto] = useState(false);
@@ -9,7 +10,7 @@ export default function DeletePhoto() {
 		e.preventDefault();
 		setDelteingPhoto(false);
 
-		const res = await fetch(`http://localhost:3000/photos/${id}`, {
+		const res = await fetch(`${MAIN_URL}photos/${id}`, {
 			method: "DELETE",
 		});
 

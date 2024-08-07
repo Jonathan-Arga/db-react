@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useRef } from 'react';
-import styles from './RegisterForm.module.css';
-import { Navigate } from 'react-router-dom';
+import { useRef } from "react";
+import styles from "./RegisterForm.module.css";
+import { Navigate } from "react-router-dom";
+import { MAIN_URL } from "../../../App";
 
 export default function RegisterForm() {
 	const nameRef = useRef();
@@ -18,16 +19,16 @@ export default function RegisterForm() {
 		e.preventDefault();
 		if (passwordRef.current.value != repeatPasswordRef.current.value)
 			return (errorRef.current.textContent = "Passwords don't match!");
-		fetch('http://localhost:3000/users')
+		fetch(MAIN_URL + "users")
 			.then((res) => res.json())
 			.then((data) => {
 				if (
 					data.find(
-						(user) => user['username'] == usernameRef.current.value
+						(user) => user["username"] == usernameRef.current.value
 					)
 				)
 					return (errorRef.current.textContent =
-						'Username already exists!');
+						"Username already exists!");
 				const myUser = {
 					id: data.length + 1,
 					name: nameRef.current.value,
@@ -35,11 +36,11 @@ export default function RegisterForm() {
 					email: emailRef.current.value,
 					website: passwordRef.current.value,
 				};
-				fetch('http://localhost:3000/users', {
-					method: 'POST',
+				fetch(MAIN_URL + "users", {
+					method: "POST",
 					body: JSON.stringify(myUser),
 				}).then((res) => {
-					if (res.ok) localStorage.setItem('current', myUser.id);
+					if (res.ok) localStorage.setItem("current", myUser.id);
 				});
 			});
 	};
@@ -85,7 +86,7 @@ export default function RegisterForm() {
 				<br />
 				<p className={styles.alone} ref={errorRef}></p>
 			</fieldset>
-			{localStorage.getItem('current') ? (
+			{localStorage.getItem("current") ? (
 				<Navigate to="/home"></Navigate>
 			) : (
 				false

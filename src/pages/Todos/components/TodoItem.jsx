@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "../css/Todos.module.css";
+import { MAIN_URL } from "../../../App";
 
 export default function TodoItem({ item }) {
 	const [checked, setChecked] = useState(item.completed);
@@ -7,7 +8,7 @@ export default function TodoItem({ item }) {
 	function handleChange() {
 		setChecked((c) => !c);
 		item.completed = !item.completed;
-		fetch(`http://localhost:3000/todos/${item.id}`, {
+		fetch(`${MAIN_URL}todos/${item.id}`, {
 			method: "PUT",
 			body: JSON.stringify(item),
 		});
