@@ -1,0 +1,35 @@
+.postPage {
+	display: grid;
+	margin: 24px;
+}
+.postPageHeader {
+	font-size: 32px;
+	justify-self: left;
+	text-align: left;
+	width: 90%;
+	margin: auto 18px;
+}
+.postPageTitle {
+}
+.postPageUser {
+	font-size: 28px;
+	opacity: 70%;
+}
+.postPageBody {
+	font-size: 24px;
+	width: 85%;
+
+	margin: auto;
+	margin-bottom: 24px;
+	padding: 12px;
+	background-color: rgb(212, 218, 255);
+	color: black;
+
+	border: 1px solid rgb(212, 218, 255);
+	border-radius: 12px;
+	box-shadow: 0 0 6px white;
+}
+
+.postPageNewComment {
+	display: flex;
+}

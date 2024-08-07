@@ -1,26 +1,27 @@
-import { useState } from "react";
-import { checkLoggedIn } from "../../../util";
-import styles from "../css/Albums.module.css";
+import { useState } from 'react';
+import { checkLoggedIn } from '../../../util';
+import styles from '../css/Albums.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddAlbum() {
 	const [addingAlbum, setAddingAlbum] = useState(false);
-	const [newTitle, setNewTitle] = useState("");
-	const [failText, setFailText] = useState("");
+	const [newTitle, setNewTitle] = useState('');
+	const [failText, setFailText] = useState('');
 
 	async function addAlbum(e) {
 		e.preventDefault();
-		setFailText("");
+		setFailText('');
 
-		const currUserId = checkLoggedIn();
+		const currUserId = checkLoggedIn(useNavigate());
 		if (!currUserId) return;
-		if (newTitle.trim() === "") {
-			setFailText("Empty Title");
+		if (newTitle.trim() === '') {
+			setFailText('Empty Title');
 			return;
 		}
 
 		setAddingAlbum(false);
 
-		const res = await fetch("http://localhost:3000/albums");
+		const res = await fetch('http://localhost:3000/albums');
 		const albums = await res.json();
 		const maxId = albums
 			.map((album) => parseInt(album.id))
@@ -32,10 +33,10 @@ export default function AddAlbum() {
 			id: maxId + 1,
 		};
 
-		setNewTitle("");
+		setNewTitle('');
 
-		const res2 = await fetch("http://localhost:3000/albums", {
-			method: "POST",
+		const res2 = await fetch('http://localhost:3000/albums', {
+			method: 'POST',
 			body: JSON.stringify(newAlbum),
 		});
 	}
