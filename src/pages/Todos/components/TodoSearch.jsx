@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import styles from "../css/Todos.module.css";
+import { useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import styles from './TodoSearch.module.css';
 
 export default function TodoSearch() {
-	const [searchBy, setSearchBy] = useState("title");
-	const [searchValue, setSearchValue] = useState("");
+	const [searchBy, setSearchBy] = useState('title');
+	const [searchValue, setSearchValue] = useState('');
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	function search(e) {
@@ -15,18 +15,18 @@ export default function TodoSearch() {
 			searchBy: searchBy,
 			query: searchValue,
 		}));
-		setSearchValue("");
+		setSearchValue('');
 	}
 
 	function updateSearchBy(e) {
 		const category = e.target.value;
-		console.log("category:", category);
+		console.log('category:', category);
 		setSearchBy(category);
-		setSearchValue("");
+		setSearchValue('');
 		setSearchParams((params) => ({
 			...Object.fromEntries(params.entries()),
 			searchBy: category,
-			query: "",
+			query: '',
 		}));
 	}
 
@@ -35,18 +35,18 @@ export default function TodoSearch() {
 			const nonSearchEntries = params
 				.entries()
 				.filter(
-					([value, _]) => value !== "query" && value !== "searchBy"
+					([value, _]) => value !== 'query' && value !== 'searchBy'
 				);
 
 			return Object.fromEntries(nonSearchEntries);
 		});
-		setSearchValue("");
+		setSearchValue('');
 	}
 
 	let displayedSearch;
 
 	switch (searchBy) {
-		case "title":
+		case 'title':
 			displayedSearch = (
 				<input
 					type="text"
@@ -58,7 +58,7 @@ export default function TodoSearch() {
 			);
 			break;
 
-		case "id":
+		case 'id':
 			displayedSearch = (
 				<input
 					type="number"
@@ -75,8 +75,8 @@ export default function TodoSearch() {
 	}
 
 	return (
-		<form onSubmit={search} className={styles.search}>
-			<fieldset>
+		<form onSubmit={search}>
+			<fieldset className={styles.TodoSearch}>
 				<legend>search</legend>
 				{displayedSearch}
 				<select
@@ -89,15 +89,16 @@ export default function TodoSearch() {
 					<option value="checked">Checked</option>
 					<option value="unchecked">Unchecked</option>
 				</select>
-				<br />
-				<button className={styles.albumButton}>Search</button>
-				<button
-					type="button"
-					onClick={clearSearch}
-					className={styles.albumButton}
-				>
-					Clear
-				</button>
+				<div className={styles.SearchButtons}>
+					<button className={styles.SuccessButton}>Search</button>
+					<button
+						type="button"
+						onClick={clearSearch}
+						className={styles.CancelButton}
+					>
+						Clear
+					</button>
+				</div>
 			</fieldset>
 		</form>
 	);

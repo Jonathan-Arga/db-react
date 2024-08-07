@@ -35,8 +35,10 @@ export default function Todos() {
 
 	return (
 		<>
-			<TodoSort />
-			<TodoSearch />
+			<div className={styles.TodosHeader}>
+				<TodoSort />
+				<TodoSearch />
+			</div>
 			<AddItem />
 			<ul className={styles.todoList}>
 				{sortedTodos ? (

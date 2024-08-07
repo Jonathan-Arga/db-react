@@ -1,0 +1,25 @@
+.TodoSort {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	border: 1px white solid;
+	width: min-content;
+	height: 80px;
+
+	font-size: 24px;
+	padding: 16px;
+	justify-items: center;
+	justify-content: center;
+	row-gap: 12px;
+	column-gap: 8px;
+
+	border-radius: 12px;
+}
+.TodoSort select {
+	width: 120px;
+	height: 40px;
+	text-align: center;
+	font-size: 18px;
+}
+.TodoSort select option {
+	text-align: center;
+}
