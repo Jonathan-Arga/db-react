@@ -22,9 +22,9 @@ export default function Home() {
 			<h1>Welcome, {dataObj.data.name}</h1>
 			<p>Would you like to...</p>
 			<div className={styles.homeLinkContainer}>
-				<HomeLink path="todos" className={styles.homeLink} />
-				<HomeLink path="posts" className={styles.homeLink} />
-				<HomeLink path="albums" className={styles.homeLink} />
+				<HomeLink path="todos" />
+				<HomeLink path="posts" />
+				<HomeLink path="albums" />
 			</div>
 		</>
 	);
