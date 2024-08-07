@@ -1,4 +1,36 @@
+.postsLayoutHeader {
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.title {
+	font-size: 48px;
+	font-weight: 700;
+	color: rgb(185, 253, 255);
+	margin-left: 24px;
+}
+
+.buttons {
+	display: flex;
+	margin-left: auto;
+	text-align: center;
+	gap: 12px;
+}
+.NewPostButton {
+	width: 54px;
+	height: 54px;
+	padding: 0;
+
+	background-color: rgb(0, 185, 0);
+	font-size: 24px;
+}
 .DeletePostButton {
+	width: 54px;
+	height: 54px;
+	background-color: rgb(173, 0, 0);
+	padding: 0;
+
 	transition: all 0.5s ease;
 }
 
@@ -11,6 +43,56 @@
 	background-color: red;
 	animation: shake 0.5s infinite;
 }
+.newPostDialog {
+	margin: 0;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background-color: transparent;
+
+	border: none;
+}
+.newPostFieldset {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	row-gap: 4px;
+	column-gap: 12px;
+
+	background-color: rgb(26, 26, 26);
+
+	border: 2px solid white;
+	border-radius: 12px;
+
+	padding: 18px;
+
+	width: 25dvw;
+	height: 25dvh;
+}
+.newPostFieldset input {
+	grid-column: span 2;
+	width: 50%;
+	height: 24px;
+	justify-self: left;
+}
+.newPostFieldset textarea {
+	grid-column: span 2;
+	width: 80%;
+	height: 100%;
+	margin-top: -12px;
+	justify-self: left;
+}
+.newPostFieldset button {
+	margin-top: 12px;
+	height: 60%;
+}
+.confirmationButton {
+	background-color: rgb(0, 182, 0);
+}
+.cancelationButton {
+	background-color: red;
+}
+
 @keyframes shake {
 	0% {
 		transform: translate(1px, 1px) rotate(0deg);

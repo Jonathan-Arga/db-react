@@ -1,9 +1,10 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { MAIN_URL } from '../../../App';
 import { useEffect, useState } from 'react';
 
 export default function PostPage() {
 	const { postid } = useParams();
+	const navigate = useNavigate();
 	const [post, setPost] = useState(undefined);
 	const [user, setUser] = useState(undefined);
 	useEffect(() => {
@@ -13,7 +14,8 @@ export default function PostPage() {
 				setPost(data);
 				fetch(MAIN_URL + `users/${data.userId}`)
 					.then((response) => response.json())
-					.then((data) => setUser(data));
+					.then((data) => setUser(data))
+					.catch((err) => (err ? navigate('/posts') : false));
 			});
 	}, []);
 

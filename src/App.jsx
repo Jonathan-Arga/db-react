@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+
 import Login from "./pages/Login/Login";
 import Register from "./pages/Signup/Register";
 import Home from "./pages/Home/Home";
 import Todos from "./pages/Todos/Todos";
 import Posts from "./pages/Posts/Posts";
-import PostItem from "./pages/Posts/components/PostItem";
 import PostPage from "./pages/Posts/components/PostPage";
 import Albums from "./pages/Albums/Albums";
 import AlbumPage from "./pages/Albums/components/AlbumPage";
