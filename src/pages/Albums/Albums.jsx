@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { useFetch, checkLoggedIn, getData } from "../../util";
+import { checkLoggedIn, getData } from "../../util";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import AlbumItem from "./components/AlbumItem";
 import AlbumSearch from "./components/AlbumSearch";
 import AddAlbum from "./components/AddAlbum";
+import styles from "./css/Albums.module.css";
 
 export default function Albums() {
 	const navigate = useNavigate();
@@ -40,7 +41,7 @@ export default function Albums() {
 		<>
 			<AlbumSearch />
 			<AddAlbum />
-			<ul>
+			<ul className={styles.albumList}>
 				{filteredAlbums ? (
 					filteredAlbums.map((album) => (
 						<AlbumItem key={album.id} album={album} />

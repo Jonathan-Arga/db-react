@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "../css/Albums.module.css";
 
 export default function DeletePhoto() {
 	const [deletingPhoto, setDelteingPhoto] = useState(false);
@@ -18,7 +19,7 @@ export default function DeletePhoto() {
 
 	if (deletingPhoto)
 		return (
-			<div>
+			<div className={styles.dialog}>
 				<p>Which photo do you want to delete?</p>
 				<form onSubmit={addPhoto}>
 					<input
@@ -26,17 +27,26 @@ export default function DeletePhoto() {
 						value={id}
 						onChange={(e) => setId(e.target.value)}
 						placeholder="ID"
+						className={styles.blockInput}
 					/>
 
-					<button>delete</button>
+					<button className={styles.albumButton}>delete</button>
 					<button
 						type="button"
 						onClick={() => setDelteingPhoto(false)}
+						className={styles.albumButton}
 					>
 						Cancel
 					</button>
 				</form>
 			</div>
 		);
-	return <button onClick={() => setDelteingPhoto(true)}>Delete Photo</button>;
+	return (
+		<button
+			onClick={() => setDelteingPhoto(true)}
+			className={styles.lightAlbumButton}
+		>
+			Delete Photo
+		</button>
+	);
 }

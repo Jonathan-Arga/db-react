@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { checkLoggedIn } from "../../../util";
+import styles from "../css/Albums.module.css";
 
 export default function AddPhoto({ albumId }) {
 	const [addingPhoto, setAddingPhoto] = useState(false);
@@ -10,7 +11,6 @@ export default function AddPhoto({ albumId }) {
 
 	async function addPhoto(e) {
 		e.preventDefault();
-		setAddingPhoto(false);
 
 		const currUserId = checkLoggedIn();
 		if (!currUserId) return;
@@ -18,6 +18,7 @@ export default function AddPhoto({ albumId }) {
 			setFailText("Empty Title");
 			return;
 		}
+		setAddingPhoto(false);
 
 		const res = await fetch("http://localhost:3000/photos");
 		const photos = await res.json();
@@ -48,7 +49,7 @@ export default function AddPhoto({ albumId }) {
 
 	if (addingPhoto)
 		return (
-			<div>
+			<div className={styles.dialog}>
 				<p>What's the title for your photo?</p>
 				<form onSubmit={addPhoto}>
 					<input
@@ -56,30 +57,40 @@ export default function AddPhoto({ albumId }) {
 						value={newTitle}
 						onChange={(e) => setNewTitle(e.target.value)}
 						placeholder="Title"
+						className={styles.blockInput}
 					/>
 					<input
 						type="text"
 						value={newURL}
 						onChange={(e) => setNewURL(e.target.value)}
 						placeholder="Photo URL"
+						className={styles.blockInput}
 					/>
 					<input
 						type="text"
 						value={newThumbnail}
 						onChange={(e) => setNewThumbnail(e.target.value)}
 						placeholder="Thumbnail URL"
+						className={styles.blockInput}
 					/>
-					<button>Add</button>
-					<button type="button" onClick={() => setAddingPhoto(false)}>
+					<button className={styles.albumButton}>Add</button>
+					<button
+						className={styles.albumButton}
+						type="button"
+						onClick={() => setAddingPhoto(false)}
+					>
 						Cancel
 					</button>
 				</form>
+				<p>{failText}</p>
 			</div>
 		);
 	return (
-		<div>
-			<button onClick={() => setAddingPhoto(true)}>Add Photo</button>
-			<p>{failText}</p>
-		</div>
+		<button
+			onClick={() => setAddingPhoto(true)}
+			className={styles.lightAlbumButton}
+		>
+			Add Photo
+		</button>
 	);
 }
