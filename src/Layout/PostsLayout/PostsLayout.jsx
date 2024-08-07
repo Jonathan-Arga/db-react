@@ -16,7 +16,7 @@ export function DeletePost(userId, postId, navigate) {
 	}).then(() => navigate());
 }
 export async function HighestID(objects = [{}], idfield) {
-	return await Math.max(...objects.map((o) => o[idfield]));
+	return Math.max(...objects.map((o) => Number.parseInt(o[idfield])));
 }
 
 export default function PostsLayout() {

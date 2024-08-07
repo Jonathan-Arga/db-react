@@ -1,0 +1,77 @@
+.postPage {
+	display: grid;
+	margin: 24px;
+
+	max-height: 100dvh;
+}
+.postPageHeader {
+	font-size: 32px;
+	justify-self: left;
+	text-align: left;
+	width: 90%;
+	margin: auto 18px;
+}
+.postPageTitle {
+	font-family: monospace;
+}
+.postPageUser {
+	font-size: 28px;
+	opacity: 70%;
+}
+.postPageBody {
+	font-size: 24px;
+	width: 85%;
+
+	margin: auto;
+	margin-bottom: 24px;
+	padding: 12px;
+	background-color: rgb(212, 218, 255);
+	color: black;
+
+	border: 1px solid rgb(212, 218, 255);
+	border-radius: 12px;
+	box-shadow: 0 0 6px white;
+}
+
+.postPageNewComment {
+	display: grid;
+	width: 50%;
+	margin: 12px auto;
+	grid-template-columns: minmax(100px, 1fr) 180px;
+}
+.postPageNewComment input {
+	width: 25%;
+	grid-column: span 2;
+}
+.postPageNewComment textarea {
+	height: 70px;
+	width: 100%;
+}
+.postPageNewComment button {
+	width: 120px;
+	height: 40px;
+	margin: auto;
+	background-color: lightgreen;
+	color: rgb(0, 71, 0);
+}
+
+.postPageComments {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 22px;
+
+	overflow-y: scroll;
+	max-height: 76dvh;
+	padding: 12px;
+
+	margin-top: auto;
+}
+.postPageComments fieldset {
+	border: 2px solid white;
+	border-radius: 6px 8px;
+	width: fit-content;
+	text-align: left;
+
+	color: rgb(255, 249, 240);
+	box-shadow: 4px 4px 6px rgb(121, 121, 121);
+}
