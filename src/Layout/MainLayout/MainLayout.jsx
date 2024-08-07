@@ -55,6 +55,16 @@ export default function Layout() {
 					>
 						Albums
 					</NavLink>
+					<NavLink
+						to="info"
+						className={({ isActive }) =>
+							isActive
+								? `${styles.navLink} ${styles.active}`
+								: `${styles.navLink}`
+						}
+					>
+						Info
+					</NavLink>
 					<button onClick={signOut} className={styles.signoutButton}>
 						Sign out
 					</button>

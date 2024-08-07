@@ -1,0 +1,14 @@
+.infoContainer {
+	margin-top: 50px;
+	text-align: left;
+	margin-left: 50px;
+}
+
+.infoContainer span {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.infoContainer p {
+	font-size: 1.2rem;
+}

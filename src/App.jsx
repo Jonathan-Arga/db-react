@@ -14,6 +14,7 @@ import MainLayout from "./Layout/MainLayout/MainLayout";
 import "./App.css";
 import NavigateHome from "./Layout/MainLayout/NavigateHome";
 import SectionLayout from "./Layout/SectionLayout/SectionLayout";
+import Info from "./pages/Info/Info";
 
 export const MAIN_URL = "http://localhost:3000/";
 
@@ -49,6 +50,7 @@ function App() {
 							element={<AlbumPage />}
 						/>
 					</Route>
+					<Route path="info" element={<Info />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
