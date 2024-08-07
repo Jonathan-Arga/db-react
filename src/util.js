@@ -53,7 +53,6 @@ function checkLoggedIn() {
 	const currUserId = localStorage.getItem("current");
 	if (!currUserId) {
 		alert("You are not signed in");
-		navigate("/login");
 	}
 	return currUserId;
 }

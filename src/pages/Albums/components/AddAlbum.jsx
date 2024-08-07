@@ -12,7 +12,7 @@ export default function AddAlbum() {
 		e.preventDefault();
 		setFailText("");
 
-		const currUserId = checkLoggedIn();
+		const currUserId = checkLoggedIn(useNavigate());
 		if (!currUserId) return;
 		if (newTitle.trim() === "") {
 			setFailText("Empty Title");
@@ -22,6 +22,7 @@ export default function AddAlbum() {
 		setAddingAlbum(false);
 
 		const res = await fetch(MAIN_URL + "albums");
+
 		const albums = await res.json();
 		const maxId = albums
 			.map((album) => parseInt(album.id))
@@ -37,6 +38,7 @@ export default function AddAlbum() {
 
 		const res2 = await fetch(MAIN_URL + "albums", {
 			method: "POST",
+
 			body: JSON.stringify(newAlbum),
 		});
 	}
