@@ -12,9 +12,9 @@ import AlbumPage from "./pages/Albums/components/AlbumPage";
 import AlbumsLayout from "./Layout/AlbumsLayout/AlbumsLayout";
 import PostsLayout from "./Layout/PostsLayout/PostsLayout";
 import MainLayout from "./Layout/MainLayout/MainLayout";
+import TodosLayout from "./Layout/TodoLayout/TodoLayout";
 
 import "./App.css";
-import PostItem from "./pages/Posts/components/PostItem";
 import NavigateHome from "./Layout/MainLayout/NavigateHome";
 
 export const MAIN_URL = "http://localhost:3000/";
@@ -28,11 +28,12 @@ function App() {
 				<Route path="/" element={<MainLayout />}>
 					<Route index element={<NavigateHome />} />
 					<Route path="home" element={<Home />} />
-					<Route path="todos" element={<Todos />} />
-
+					<Route path="todos" element={<TodosLayout />}>
+						<Route index element={<Todos />} />
+					</Route>
 					<Route path="posts" element={<PostsLayout />}>
 						<Route index element={<Posts />} />
-						<Route path=":postid" element={<PostItem />} />
+						<Route path=":postid" element={<PostPage />} />
 					</Route>
 					<Route path="albums" element={<AlbumsLayout />}>
 						<Route index element={<Albums />} />
