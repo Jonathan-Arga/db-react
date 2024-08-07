@@ -1,5 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useOutletContext, useParams } from "react-router-dom";
+import {
+	Link,
+	useNavigate,
+	useOutletContext,
+	useParams,
+} from "react-router-dom";
 import { checkLoggedIn, getData } from "../../../util";
 import AddPhoto from "./AddPhoto";
 import DeletePhoto from "./DeletePhoto";
@@ -12,10 +17,12 @@ export default function AlbumPage() {
 	const [photos, setPhotos] = useState(null);
 	const userRef = useRef(null);
 	const [album, setAlbum] = useState(null);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		userRef.current = checkLoggedIn();
 		if (!userRef.current) {
+			navigate("../login");
 			return null;
 		}
 		getData(`albums/${albumId}`, setAlbum);
