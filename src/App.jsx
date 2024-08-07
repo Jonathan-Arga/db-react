@@ -15,6 +15,7 @@ import "./App.css";
 import NavigateHome from "./Layout/MainLayout/NavigateHome";
 import SectionLayout from "./Layout/SectionLayout/SectionLayout";
 import Info from "./pages/Info/Info";
+import NotFound from "./pages/NotFound/NotFound";
 
 export const MAIN_URL = "http://localhost:3000/";
 
@@ -52,6 +53,7 @@ function App() {
 					</Route>
 					<Route path="info" element={<Info />} />
 				</Route>
+				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</BrowserRouter>
 	);
