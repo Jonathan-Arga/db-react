@@ -32,6 +32,7 @@ export default function Albums() {
 	useEffect(() => {
 		userRef.current = checkLoggedIn();
 		if (!userRef.current) {
+			navigate("../login");
 			return null;
 		}
 		getData("albums", setAlbums);
