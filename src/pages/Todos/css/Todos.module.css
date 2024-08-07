@@ -26,10 +26,12 @@
 }
 
 .todoItem h2 {
+	font-size: 1rem;
 	margin-left: 20px;
 }
 
 .todoItem p {
+	font-size: 0.8rem;
 	margin-left: 10px;
 	color: rgb(175, 175, 175);
 	min-width: 60px;

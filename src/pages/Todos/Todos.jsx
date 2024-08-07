@@ -22,6 +22,7 @@ export default function Todos() {
 
 	const filteredTodos =
 		userTodos && userTodos.filter(filterFuntions[searchBy](query));
+
 	const sortedTodos =
 		filteredTodos && filteredTodos.sort(sortFunctions[sortBy]);
 

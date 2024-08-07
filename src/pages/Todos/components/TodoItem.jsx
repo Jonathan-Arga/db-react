@@ -32,7 +32,7 @@ export default function TodoItem({ item }) {
 
 	return (
 		<li className={styles.todoItem} onClick={handleChange}>
-			<input type="checkbox" checked={checked} onChange={handleChange} />
+			<input type="checkbox" checked={checked} onChange={() => true} />
 			<p>ID: {item.id}</p>
 			<h2>{item.title}</h2>
 		</li>
