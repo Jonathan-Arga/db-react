@@ -2,11 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { MAIN_URL } from "../../App";
 import PostItem from "./components/PostItem";
 import styles from "./Posts.module.css";
-import { DeletingPostsContext } from "../../Layout/PostsLayout/PostsLayout";
+import { DeletingContext } from "../../Layout/SectionLayout/SectionLayout";
 
 export default function Posts() {
 	const [posts, setPosts] = useState([]);
-	const [isDeletingPosts] = useContext(DeletingPostsContext);
+	const [isDeletingPosts] = useContext(DeletingContext);
+	const [currentSearch, setCurrentSearch] = useState("");
 	useEffect(() => {
 		fetch(MAIN_URL + "posts")
 			.then((response) => response.json())
@@ -19,17 +20,24 @@ export default function Posts() {
 			(item["body"].includes(currentSearch) ||
 				item["title"].includes(currentSearch)));
 	return (
-		<ul className={styles.Posts}>
-			{posts.map((item) =>
-				isDeletingPosts ? (
-					item.userId ===
-					Number.parseInt(localStorage.getItem("current")) ? (
+		<>
+			<input
+				type="search"
+				placeholder="Search posts"
+				onChange={(e) => setCurrentSearch(e.target.value)}
+			/>
+			<ul className={styles.Posts}>
+				{posts.map((item) =>
+					isDeletingPosts ? (
+						item.userId ===
+						Number.parseInt(localStorage.getItem("current")) ? (
+							<PostItem key={JSON.stringify(item)} post={item} />
+						) : null
+					) : isSearching(item) ? (
 						<PostItem key={JSON.stringify(item)} post={item} />
 					) : null
-				) : isSearching(item) ? (
-					<PostItem key={JSON.stringify(item)} post={item} />
-				) : null
-			)}
-		</ul>
+				)}
+			</ul>
+		</>
 	);
 }

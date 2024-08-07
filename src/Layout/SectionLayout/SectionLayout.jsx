@@ -114,6 +114,7 @@ export default function SectionLayout({ sectionName, fields }) {
 			>
 				<div className={styles.layoutHeader}>
 					<div className={styles.title}>{sectionName}</div>
+
 					<Buttons />
 				</div>
 				<Dialog />

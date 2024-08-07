@@ -3,7 +3,7 @@
 	display: flex;
 	align-items: center;
 }
-.postsLayoutHeader input[type='search'] {
+.postsLayoutHeader input[type="search"] {
 	width: 35%;
 	margin: auto;
 	height: 44px;
@@ -20,6 +20,7 @@
 	display: flex;
 	text-align: center;
 	gap: 12px;
+	margin-left: auto;
 }
 .NewButton {
 	width: 54px;
