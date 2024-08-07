@@ -41,7 +41,6 @@ export default function Albums() {
 	return (
 		<>
 			<AlbumSearch />
-			<AddAlbum />
 			<ul className={styles.albumList}>
 				{filteredAlbums ? (
 					filteredAlbums.map((album) => (

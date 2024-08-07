@@ -1,9 +1,9 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { MAIN_URL } from '../../../App';
-import { useEffect, useRef, useState } from 'react';
-import { HighestID } from '../../../Layout/PostsLayout/PostsLayout';
+import { useNavigate, useParams } from "react-router-dom";
+import { MAIN_URL } from "../../../App";
+import { useEffect, useRef, useState } from "react";
+import { HighestID } from "../../../Layout/SectionLayout/SectionLayout";
 
-import styles from './PostPage.module.css';
+import styles from "./PostPage.module.css";
 
 export default function PostPage() {
 	const { postid } = useParams();
@@ -24,7 +24,7 @@ export default function PostPage() {
 					.then((response) => response.json())
 					.then((data) => setUser(data))
 					.catch((err) =>
-						err ? console.log(err) && navigate('/posts') : false
+						err ? console.log(err) && navigate("/posts") : false
 					);
 			});
 		fetch(MAIN_URL + `comments?postId=${postid}`)
@@ -41,38 +41,38 @@ export default function PostPage() {
 			.catch((err) => {
 				if (err) {
 					console.log(err);
-					navigate('/posts');
+					navigate("/posts");
 				}
 			});
-		console.log('fetching comments');
+		console.log("fetching comments");
 	};
 	const newComment = () => {
 		if (
 			!commentTitleRef ||
-			commentTitleRef.current.value === '' ||
+			commentTitleRef.current.value === "" ||
 			!commentBodyRef ||
-			commentBodyRef.current.value === ''
+			commentBodyRef.current.value === ""
 		)
-			return alert('Please fill out all fields.');
+			return alert("Please fill out all fields.");
 		setComments(undefined);
 		fetch(
 			MAIN_URL +
-				`users/${Number.parseInt(localStorage.getItem('current'))}`
+				`users/${Number.parseInt(localStorage.getItem("current"))}`
 		)
 			.then((res) => res.json())
 			.then((commentingUser) => {
-				fetch(MAIN_URL + 'comments')
+				fetch(MAIN_URL + "comments")
 					.then((res) => res.json())
 					.then(async (data) =>
-						fetch(MAIN_URL + 'comments', {
-							method: 'POST',
+						fetch(MAIN_URL + "comments", {
+							method: "POST",
 							body: JSON.stringify({
 								postId: Number.parseInt(postid),
 								id: (
-									(await HighestID(data, 'id')) + 1
+									(await HighestID(data, "id")) + 1
 								).toString(),
 								name: commentTitleRef.current.value,
-								email: commentingUser['email'],
+								email: commentingUser["email"],
 								body: commentBodyRef.current.value,
 							}),
 						}).then(() => fetchComments())
@@ -86,25 +86,25 @@ export default function PostPage() {
 				<div className={styles.postPage}>
 					<div className={styles.postPageHeader}>
 						<div className={styles.postPageTitle}>
-							{post['title']}
+							{post["title"]}
 						</div>
 						<div className={styles.postPageUser}>
-							-{user['username']}
+							-{user["username"]}
 						</div>
 					</div>
 					<div
 						onKeyDown={(ev) =>
-							ev.key === 'Enter'
+							ev.key === "Enter"
 								? newComment()
 								: console.log(ev.key)
 						}
 						className={styles.postPageBody}
 					>
-						{post['body']}
+						{post["body"]}
 					</div>
 					<div
 						onKeyDown={(ev) =>
-							ev.key === 'Enter' ? newComment() : false
+							ev.key === "Enter" ? newComment() : false
 						}
 						className={styles.postPageNewComment}
 					>
@@ -123,13 +123,13 @@ export default function PostPage() {
 									className="postComment"
 								>
 									<legend>
-										{comment['name']}&#10240;-&#10240;
+										{comment["name"]}&#10240;-&#10240;
 										<span className="subtitle">
-											{comment['email']}
+											{comment["email"]}
 										</span>
 									</legend>
 									<div className="commentBody">
-										{comment['body']}
+										{comment["body"]}
 									</div>
 								</fieldset>
 							))

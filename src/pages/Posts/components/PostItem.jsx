@@ -1,29 +1,32 @@
-import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import styles from './PostItem.module.css';
-import { useContext } from 'react';
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
+import styles from "./PostItem.module.css";
+import { useContext } from "react";
 import {
-	DeletePost,
-	DeletingPostsContext,
-} from '../../../Layout/PostsLayout/PostsLayout';
+	Delete,
+	DeletingContext,
+} from "../../../Layout/SectionLayout/SectionLayout";
 export default function PostItem({ post }) {
 	const navigate = useNavigate();
-	const [deletingPosts] = useContext(DeletingPostsContext);
-	const postHref = `${post['id']}`;
+	const [deletingPosts] = useContext(DeletingContext);
+	const postHref = `${post["id"]}`;
 
 	return (
 		<fieldset
 			className={styles.PostItem}
 			onClick={() =>
 				deletingPosts
-					? DeletePost(post['userId'], post['id'], () =>
-							window.location.reload()
+					? Delete(
+							post["id"],
+							() => window.location.reload(),
+							"posts",
+							post["userId"]
 					  )
 					: navigate(postHref)
 			}
 		>
-			<legend className={styles.PostItemHeader}>{post['title']}</legend>
-			<div className={styles.PostItemText}>{post['body']}</div>
+			<legend className={styles.PostItemHeader}>{post["title"]}</legend>
+			<div className={styles.PostItemText}>{post["body"]}</div>
 		</fieldset>
 	);
 }

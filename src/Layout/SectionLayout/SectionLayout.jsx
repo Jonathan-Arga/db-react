@@ -2,7 +2,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { createContext, useRef, useState } from "react";
 import { MAIN_URL } from "../../App";
 
-import styles from "./Layout.module.css";
+import styles from "./SectionLayout.module.css";
 
 export const DeletingContext = createContext(null);
 
@@ -14,9 +14,9 @@ export function Delete(id, navigate, path, userId = null) {
 	}).then(() => navigate());
 }
 export async function HighestID(path, idfield) {
-	const res = await fetch(`${MAIN_URL}/${path}`);
+	const res = await fetch(`${MAIN_URL}${path}`);
 	const data = await res.json();
-	return Math.max(...objects.map((o) => Number.parseInt(data[idfield])));
+	return Math.max(...data.map((obj) => Number.parseInt(obj[idfield])));
 }
 
 export default function SectionLayout({ sectionName, fields }) {
@@ -80,7 +80,7 @@ export default function SectionLayout({ sectionName, fields }) {
 				}).then(() => {
 					newDialog.current.close();
 					newTitle.current.value = "";
-					newTextField.current.value = "";
+					if (newTextField.value) newTextField.current.value = "";
 					window.location.reload();
 				});
 			});
@@ -112,8 +112,8 @@ export default function SectionLayout({ sectionName, fields }) {
 			<DeletingContext.Provider
 				value={[DeletingContextState, SetDeletingContextState]}
 			>
-				<div className={styles.postsLayoutHeader}>
-					<div className={styles.title}></div>
+				<div className={styles.layoutHeader}>
+					<div className={styles.title}>{sectionName}</div>
 					<Buttons />
 				</div>
 				<Dialog />
