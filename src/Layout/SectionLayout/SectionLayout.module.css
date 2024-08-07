@@ -1,9 +1,9 @@
-.postsLayoutHeader {
+.layoutHeader {
 	width: 100%;
 	display: flex;
 	align-items: center;
 }
-.postsLayoutHeader input[type='search'] {
+.postsLayoutHeader input[type="search"] {
 	width: 35%;
 	margin: auto;
 	height: 44px;
@@ -20,8 +20,9 @@
 	display: flex;
 	text-align: center;
 	gap: 12px;
+	margin-left: auto;
 }
-.NewPostButton {
+.NewButton {
 	width: 54px;
 	height: 54px;
 	padding: 0;
@@ -29,7 +30,7 @@
 	background-color: rgb(0, 185, 0);
 	font-size: 24px;
 }
-.DeletePostButton {
+.DeleteButton {
 	width: 54px;
 	height: 54px;
 	background-color: rgb(173, 0, 0);
@@ -38,16 +39,16 @@
 	transition: all 0.5s ease;
 }
 
-.DeletePostButton:hover {
+.DeleteButton:hover {
 	background-color: red;
 }
 
-.DeletePostButtonFocused {
+.DeleteButtonFocused {
 	outline: 4px auto -webkit-focus-ring-color;
 	background-color: red;
 	animation: shake 0.5s infinite;
 }
-.newPostDialog {
+.newDialog {
 	margin: 0;
 	position: absolute;
 	left: 50%;
@@ -57,7 +58,7 @@
 
 	border: none;
 }
-.newPostFieldset {
+.newFieldset {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	row-gap: 4px;
@@ -73,20 +74,20 @@
 	width: 25dvw;
 	height: 25dvh;
 }
-.newPostFieldset input {
+.newFieldset input {
 	grid-column: span 2;
 	width: 50%;
 	height: 24px;
 	justify-self: left;
 }
-.newPostFieldset textarea {
+.newFieldset textarea {
 	grid-column: span 2;
 	width: 80%;
 	height: 100%;
 	margin-top: -12px;
 	justify-self: left;
 }
-.newPostFieldset button {
+.newFieldset button {
 	margin-top: 12px;
 	height: 60%;
 }
