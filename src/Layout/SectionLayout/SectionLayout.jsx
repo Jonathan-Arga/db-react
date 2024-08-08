@@ -121,6 +121,14 @@ export default function SectionLayout({ sectionName, fields }) {
 				value={[DeletingContextState, SetDeletingContextState]}
 			>
 				<div className={styles.layoutHeader}>
+					{currentPage !== sectionName && (
+						<button
+							className={styles.backButton}
+							onClick={() => navigate(`/${sectionName}`)}
+						>
+							&larr;
+						</button>
+					)}
 					<div className={styles.title}>{sectionName}</div>
 
 					<Buttons />
