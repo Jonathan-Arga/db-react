@@ -13,10 +13,18 @@ export function Delete(id, navigate, path, userId = null) {
 		method: "DELETE",
 	}).then(() => navigate(path));
 }
-export async function HighestID(path, idfield) {
-	const res = await fetch(`${MAIN_URL}${path}`);
-	const data = await res.json();
-	return Math.max(...data.map((obj) => Number.parseInt(obj[idfield])));
+export async function HighestID(pathOrData, idfield) {
+	if (pathOrData instanceof Array) {
+		return Math.max(
+			...pathOrData.map((obj) => Number.parseInt(obj[idfield]))
+		);
+	}
+	if (pathOrData instanceof String) {
+		const res = await fetch(`${MAIN_URL}${path}`);
+		const data = await res.json();
+		return Math.max(...data.map((obj) => Number.parseInt(obj[idfield])));
+	}
+	console.log("something went wrong in HighestID");
 }
 
 export default function SectionLayout({ sectionName, fields }) {

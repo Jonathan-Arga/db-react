@@ -59,6 +59,15 @@
 	background-color: lightgray;
 	margin: 10px 20px;
 	padding: 8px 12px;
+	transition: all 0.2s;
+}
+
+.deleteButton {
+	color: white;
+	background-color: red;
+	margin: 10px 20px;
+	padding: 8px 12px;
+	transition: all 0.2s;
 }
 
 .dialog {
