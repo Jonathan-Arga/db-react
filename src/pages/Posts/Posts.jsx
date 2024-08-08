@@ -15,14 +15,15 @@ export default function Posts() {
 	useEffect(() => {
 		if (!checkLoggedIn()) {
 			navigate("../login");
-		}
-		getData("posts", setPosts);
+		} else getData("posts", setPosts);
 	}, []);
+
 	const isSearching = (item) =>
 		!currentSearch ||
 		(currentSearch !== "" &&
 			(item["body"].includes(currentSearch) ||
 				item["title"].includes(currentSearch)));
+
 	return (
 		<>
 			<input

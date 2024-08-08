@@ -11,24 +11,23 @@ export default function Info() {
 		const currentUser = checkLoggedIn();
 		if (!currentUser) {
 			navigate("/login");
-		}
-		getData(`users/${localStorage.getItem("current")}`, setUser);
+		} else getData(`users/${localStorage.getItem("current")}`, setUser);
 	}, []);
 
 	return user ? (
 		<div className={styles.infoContainer}>
-			<p>
-				<span>Name:</span> {user.name}
-			</p>
-			<p>
-				<span>Username:</span> {user.username}
-			</p>
-			<p>
-				<span>Email:</span> {user.email}
-			</p>
-			<p>
-				<span>Website:</span> {user.website}
-			</p>
+			<fieldset>
+				<legend>Name</legend> {user.name}
+			</fieldset>
+			<fieldset>
+				<legend>Username</legend> {user.username}
+			</fieldset>
+			<fieldset>
+				<legend>Email</legend> {user.email}
+			</fieldset>
+			<fieldset>
+				<legend>Website</legend> {user.website}
+			</fieldset>
 		</div>
 	) : (
 		<h1>Loading...</h1>

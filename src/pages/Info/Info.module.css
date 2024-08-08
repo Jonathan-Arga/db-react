@@ -1,14 +1,23 @@
 .infoContainer {
 	margin-top: 50px;
-	text-align: left;
+	text-align: center;
 	margin-left: 50px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
 }
 
-.infoContainer span {
+.infoContainer legend {
+	color: white;
 	font-weight: bold;
-	text-decoration: underline;
+	font-size: 1.4rem;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.infoContainer p {
+.infoContainer fieldset {
 	font-size: 1.2rem;
+	border: 2px solid grey;
+	border-radius: 12px;
+	color: rgb(204, 204, 204);
+	box-shadow: 0 0 8px gray, inset 0 0 12px gray;
 }

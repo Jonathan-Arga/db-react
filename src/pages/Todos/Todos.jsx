@@ -30,8 +30,7 @@ export default function Todos() {
 		userRef.current = checkLoggedIn();
 		if (!userRef.current) {
 			navigate("/login");
-		}
-		getData("todos", setTodos);
+		} else getData("todos", setTodos);
 	}, []);
 
 	return (

@@ -12,8 +12,7 @@ export default function Home() {
 		const currentUser = checkLoggedIn();
 		if (!currentUser) {
 			navigate("/login");
-		}
-		getData(`users/${localStorage.getItem("current")}`, setUser);
+		} else getData(`users/${localStorage.getItem("current")}`, setUser);
 	}, []);
 
 	return user ? (
